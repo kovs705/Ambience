@@ -12,16 +12,18 @@ protocol MainVCViewProtocol: AnyObject {
 }
 
 protocol MainVCPresenterProtocol: AnyObject {
-    
-    init(view: MainVCViewProtocol)
+    var ambiences: AmbienceManagerProtocol? { get }
+    init(view: MainVCViewProtocol, ambiences: AmbienceManagerProtocol?)
 }
 
 final class MainVCPresenter: MainVCPresenterProtocol {
     
     weak var view: MainVCViewProtocol?
+    var ambiences: AmbienceManagerProtocol?
     
-    required init(view: MainVCViewProtocol) {
+    required init(view: MainVCViewProtocol, ambiences: AmbienceManagerProtocol?) {
         self.view = view
+        self.ambiences = ambiences
     }
     
     

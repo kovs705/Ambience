@@ -9,8 +9,9 @@ import UIKit
 
 struct Ambience {
     let name: String
-    let firstColor: UIColor
-    let secondColor: UIColor
+    let firstColor: String
+    let secondColor: String
+    let image: String
     
     // other stuff to come..
 }

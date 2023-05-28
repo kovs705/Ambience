@@ -26,7 +26,7 @@ class MainVC: UIViewController {
                                            collectionViewLayout: layout)
         collectionView.dataSource = self
         collectionView.delegate = self
-        // collectionView.register(CategoriesCollectionViewCell.self, forCellWithReuseIdentifier: "categories")
+        collectionView.register(AmbiCell.self, forCellWithReuseIdentifier: AmbiCell.id)
     }
 }
 
@@ -39,17 +39,24 @@ extension MainVC: MainVCViewProtocol {
 extension MainVC: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return presenter.ambiences?.all.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        <#code#>
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AmbiCell.id, for: indexPath) as! AmbiCell
+        guard let ambience = presenter.ambiences?.all[indexPath.row] else {
+            return cell
+        }
+        
+        cell.configureUI(ambience: ambience)
+        
+        return cell
     }
     
 }
 
 extension MainVC: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        <#code#>
+        // 
     }
 }
