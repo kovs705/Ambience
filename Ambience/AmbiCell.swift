@@ -11,6 +11,13 @@ class AmbiCell: UICollectionViewCell {
     
     static let id = "ambiCell"
     
+    let firstBlock = UIView()
+    let secondBlock = UIView()
+    let thirdBlock = UIView()
+    
+    let imageView = UIImageView()
+    let name = UILabel()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
@@ -22,6 +29,25 @@ class AmbiCell: UICollectionViewCell {
     }
     
     private func configure() {
+        addSubviews()
         
+        configureFirstB()
+        configureOtherB()
+    }
+    
+    private func configureFirstB() {
+        
+    }
+    
+    private func configureOtherB() {
+        
+    }
+    
+    private func addSubviews() {
+        let allViews = [firstBlock, secondBlock, thirdBlock, imageView, name]
+        allViews.forEach {
+            contentView.addSubview($0)
+            $0.translatesAutoresizingMaskIntoConstraints = false
+        }
     }
 }
