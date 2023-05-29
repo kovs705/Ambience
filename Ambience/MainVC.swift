@@ -48,7 +48,7 @@ extension MainVC: UICollectionViewDataSource {
             return cell
         }
         
-        cell.configureUI(ambience: ambience)
+        cell.configure(ambience: ambience)
         
         return cell
     }

@@ -16,7 +16,8 @@ final class Builder: BuilderProtocol {
     
     func getMainModule() -> UIViewController {
         let view = MainVC()
-        let presenter = MainVCPresenter(view: view)
+        let ambienceManager = AmbienceManager()
+        let presenter = MainVCPresenter(view: view, ambiences: ambienceManager)
         view.presenter = presenter
         return view
     }

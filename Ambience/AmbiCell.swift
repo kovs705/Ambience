@@ -31,7 +31,7 @@ class AmbiCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func configure(ambience: Ambience) {
+    func configure(ambience: Ambience) {
         addSubviews()
         
         configureUI(ambience: ambience)
@@ -55,8 +55,8 @@ class AmbiCell: UICollectionViewCell {
     }
     
     private func configureOtherB(_ ambience: Ambience) {
-        secondBlock.backgroundColor = UIColor(named: ambience.firstColor)!
-        thirdBlock.backgroundColor = UIColor(named: ambience.secondColor)!
+        secondBlock.backgroundColor = ambience.firstColor
+        thirdBlock.backgroundColor = ambience.secondColor
         
         secondBlock.layer.cornerRadius = 15
         thirdBlock.layer.cornerRadius = 15

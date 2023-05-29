@@ -33,3 +33,11 @@ enum Colors {
         static let two = "UrbanC2"
     }
 }
+
+enum Images {
+    static let blueForest = "BlueForest"
+    static let highestMountains = "HighestMountains"
+    static let peacefullNight = "PeacefullNight"
+    static let silentWinter = "SilentWinter"
+    static let urbanCity = "UrbanCity"
+}
