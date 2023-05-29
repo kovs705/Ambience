@@ -15,7 +15,7 @@ class MainVC: UIViewController {
     private var descriptionLabel = UILabel()
     
     override func viewDidLoad() {
-        
+        print("Hello world!")
     }
     
     
