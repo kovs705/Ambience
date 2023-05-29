@@ -16,18 +16,33 @@ class MainVC: UIViewController {
     
     override func viewDidLoad() {
         print("Hello world!")
+        
+        setupCollectionView()
+        
     }
     
     
     private func setupCollectionView() {
-        let layout = TwoColumnLayout.createTwoColumnLayout(in: view)
-        
-        collectionView = UICollectionView(frame: .zero,
-                                           collectionViewLayout: layout)
+        collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: UIHelper.createTwoColumnLayout(in: view))
+        view.addSubview(collectionView)
+
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.register(AmbiCell.self, forCellWithReuseIdentifier: AmbiCell.id)
+        
+        collectionView.backgroundColor = .systemBackground
+        collectionView.alwaysBounceVertical = true
     }
+    
+//    private func placeCV() {
+//        view.addSubview(collectionView)
+//        collectionView.translatesAutoresizingMaskIntoConstraints = false
+//
+//        collectionView.snp.makeConstraints { make in
+//            make.leading.trailing.equalToSuperview()
+//            make.top.bottom.equalTo(view.safeAreaLayoutGuide)
+//        }
+//    }
 }
 
 extension MainVC: MainVCViewProtocol {

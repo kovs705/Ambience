@@ -23,7 +23,7 @@ class AmbiCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
+        contentView.backgroundColor = .green
     }
     
     
@@ -47,7 +47,7 @@ class AmbiCell: UICollectionViewCell {
     private func configureFirstB(_ ambience: Ambience) {
         firstBlock.snp.makeConstraints { make in
             make.centerX.centerY.equalTo(contentView)
-            make.height.width.equalTo(100)
+            make.height.width.equalTo(contentView).inset(20)
         }
         
         firstBlock.layer.cornerRadius = 15
