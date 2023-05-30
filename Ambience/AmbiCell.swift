@@ -38,8 +38,8 @@ class AmbiCell: UICollectionViewCell {
     }
     
     func configureUI(ambience: Ambience) {
-        configureFirstB(ambience)
         configureOtherB(ambience)
+        configureFirstB(ambience)
         configureName(ambience)
         configureImage(ambience)
     }
@@ -47,10 +47,12 @@ class AmbiCell: UICollectionViewCell {
     private func configureFirstB(_ ambience: Ambience) {
         firstBlock.snp.makeConstraints { make in
             make.centerX.centerY.equalTo(contentView)
-            make.height.width.equalTo(contentView).inset(20)
+            make.height.width.equalTo(contentView).inset(10)
         }
         
         firstBlock.layer.cornerRadius = 15
+        imageView.layer.cornerRadius = 16
+        imageView.layer.masksToBounds = true
         
     }
     
@@ -63,7 +65,7 @@ class AmbiCell: UICollectionViewCell {
         
         secondBlock.snp.makeConstraints { make in
             make.centerX.equalTo(contentView)
-            make.centerY.equalTo(contentView).offset(-offset)
+            make.centerY.equalTo(contentView)
             make.height.width.equalTo(85)
         }
         
@@ -79,7 +81,7 @@ class AmbiCell: UICollectionViewCell {
         name.numberOfLines = 0
         
         name.snp.makeConstraints { make in
-            make.top.equalTo(firstBlock.snp.bottom).offset(10)
+            make.bottom.equalTo(contentView.snp.bottom).offset(10)
             make.leading.trailing.equalTo(contentView).offset(5)
         }
         
