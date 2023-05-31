@@ -39,12 +39,12 @@ class AmbiCell: UICollectionViewCell {
     
     func configureUI(ambience: Ambience) {
         configureOtherB(ambience)
-        configureFirstB(ambience)
+        configureFirstB()
         configureName(ambience)
         configureImage(ambience)
     }
     
-    private func configureFirstB(_ ambience: Ambience) {
+    private func configureFirstB() {
         firstBlock.snp.makeConstraints { make in
             
             make.top.equalTo(contentView).offset(12)
@@ -56,8 +56,6 @@ class AmbiCell: UICollectionViewCell {
         
         firstBlock.layer.cornerRadius = 15
         firstBlock.addShadow(color: UIColor.black.cgColor, opacity: 0.3, shadowOffset: CGSize(width: 0, height: 5), shadowRadius: 10)
-        imageView.layer.cornerRadius = 16
-        imageView.layer.masksToBounds = true
         
         contentView.bringSubviewToFront(thirdBlock)
         contentView.bringSubviewToFront(secondBlock)
@@ -106,6 +104,8 @@ class AmbiCell: UICollectionViewCell {
             make.leading.trailing.top.bottom.equalTo(firstBlock)
         }
         
+        imageView.layer.cornerRadius = 16
+        imageView.layer.masksToBounds = true
         imageView.contentMode = .scaleToFill
     }
     

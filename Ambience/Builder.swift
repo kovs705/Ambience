@@ -9,6 +9,7 @@ import UIKit
 
 protocol BuilderProtocol {
     func getMainModule() -> UIViewController
+    func getDetailModule(ambience: Ambience) -> UIViewController
 }
 
 
@@ -18,6 +19,13 @@ final class Builder: BuilderProtocol {
         let view = MainVC()
         let ambienceManager = AmbienceManager()
         let presenter = MainVCPresenter(view: view, ambiences: ambienceManager)
+        view.presenter = presenter
+        return view
+    }
+    
+    func getDetailModule(ambience: Ambience) -> UIViewController {
+        let view = AmbiVC()
+        let presenter = AmbiPresenter(view: view, ambience: ambience)
         view.presenter = presenter
         return view
     }

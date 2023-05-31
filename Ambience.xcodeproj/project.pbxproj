@@ -24,6 +24,8 @@
 		4E4A04682A234CF900F6CD93 /* AmbienceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E4A04672A234CF900F6CD93 /* AmbienceTests.swift */; };
 		4E4A04722A234CF900F6CD93 /* AmbienceUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E4A04712A234CF900F6CD93 /* AmbienceUITests.swift */; };
 		4E4A04742A234CF900F6CD93 /* AmbienceUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E4A04732A234CF900F6CD93 /* AmbienceUITestsLaunchTests.swift */; };
+		4E8776EE2A26FA5F004E3AF9 /* AmbiVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8776ED2A26FA5F004E3AF9 /* AmbiVC.swift */; };
+		4E8776F02A26FA6E004E3AF9 /* AmbiPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8776EF2A26FA6E004E3AF9 /* AmbiPresenter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +66,8 @@
 		4E4A046D2A234CF900F6CD93 /* AmbienceUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AmbienceUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E4A04712A234CF900F6CD93 /* AmbienceUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmbienceUITests.swift; sourceTree = "<group>"; };
 		4E4A04732A234CF900F6CD93 /* AmbienceUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmbienceUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		4E8776ED2A26FA5F004E3AF9 /* AmbiVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmbiVC.swift; sourceTree = "<group>"; };
+		4E8776EF2A26FA6E004E3AF9 /* AmbiPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmbiPresenter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +119,7 @@
 		4E1860D92A23B10500C8D215 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				4E8776EC2A26FA37004E3AF9 /* AmbiVC */,
 				4E1860DC2A23B12800C8D215 /* MainVC */,
 			);
 			name = Views;
@@ -229,6 +234,15 @@
 				4E4A04732A234CF900F6CD93 /* AmbienceUITestsLaunchTests.swift */,
 			);
 			path = AmbienceUITests;
+			sourceTree = "<group>";
+		};
+		4E8776EC2A26FA37004E3AF9 /* AmbiVC */ = {
+			isa = PBXGroup;
+			children = (
+				4E8776ED2A26FA5F004E3AF9 /* AmbiVC.swift */,
+				4E8776EF2A26FA6E004E3AF9 /* AmbiPresenter.swift */,
+			);
+			name = AmbiVC;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -375,7 +389,9 @@
 				4E1860EE2A23C03200C8D215 /* AmbienceManager.swift in Sources */,
 				4E1860F02A23C3BA00C8D215 /* Constants.swift in Sources */,
 				4E1860E62A23B6CA00C8D215 /* UIHelper.swift in Sources */,
+				4E8776F02A26FA6E004E3AF9 /* AmbiPresenter.swift in Sources */,
 				4E1860EB2A23BCDE00C8D215 /* Ambience.swift in Sources */,
+				4E8776EE2A26FA5F004E3AF9 /* AmbiVC.swift in Sources */,
 				4E1860E92A23B8F000C8D215 /* AmbiCell.swift in Sources */,
 				4E1860E22A23B3CC00C8D215 /* Builder.swift in Sources */,
 			);

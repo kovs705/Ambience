@@ -14,17 +14,27 @@ class MainVC: UIViewController {
     private var collectionView: UICollectionView!
     private var descriptionLabel = UILabel()
     
+    
+    // MARK: - viewDidLoad
     override func viewDidLoad() {
         print("Hello world!")
         
         setupCollectionView()
+        configureUI()
         placeCV()
     }
     
     
+    // MARK: - UI func
+    
+    func configureUI() {
+        view.addSubviews(collectionView)
+        
+        
+    }
+    
     private func setupCollectionView() {
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: UIHelper.createTwoColumnLayout(in: view))
-        view.addSubview(collectionView)
 
         collectionView.dataSource = self
         collectionView.delegate = self
@@ -37,21 +47,18 @@ class MainVC: UIViewController {
 
     
     private func placeCV() {
-        view.addSubview(collectionView)
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-
         collectionView.snp.makeConstraints { make in
             make.leading.trailing.top.bottom.equalTo(view)
         }
     }
 }
 
+// MARK: - Protocol
 extension MainVC: MainVCViewProtocol {
     
 }
 
 // MARK: - CollectionView
-
 extension MainVC: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -73,6 +80,8 @@ extension MainVC: UICollectionViewDataSource {
 
 extension MainVC: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        // 
+        let ambience = AmbienceManager().all[indexPath.row]
+        let coordinator = Builder()
+        navigationController?.pushViewController(coordinator.getDetailModule(ambience: ambience), animated: true)
     }
 }
