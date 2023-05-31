@@ -72,6 +72,7 @@ extension MainVC: UICollectionViewDataSource {
         }
         
         cell.configure(ambience: ambience)
+        cell.isHighlighted = false
         
         return cell
     }

@@ -26,6 +26,54 @@ class AmbiCell: UICollectionViewCell {
         
     }
     
+    override var isHighlighted: Bool {
+        didSet {
+            if isHighlighted {
+                handleTouchDown()
+            } else {
+                handleTouchUp()
+            }
+        }
+    }
+    
+    private func handleTouchDown() {
+        UIView.animate(withDuration: 0.35, delay: 0, options: [.beginFromCurrentState, .curveEaseInOut], animations: { [weak self] in
+            guard let self = self else { return }
+            
+            Dispatch.DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                self.animateThis(view: self.firstBlock, isRestoring: false)
+            }
+            
+            Dispatch.DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                self.animateThis(view: self.secondBlock, isRestoring: false)
+            }
+            
+            Dispatch.DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                self.animateThis(view: self.thirdBlock, isRestoring: false)
+            }
+            // self.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
+        }, completion: nil)
+    }
+    
+    private func handleTouchUp() {
+        UIView.animate(withDuration: 0.35, delay: 0, options: [.beginFromCurrentState, .curveEaseInOut], animations: { [weak self] in
+            guard let self = self else { return }
+            
+            Dispatch.DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                self.animateThis(view: self.firstBlock, isRestoring: true)
+            }
+            
+            Dispatch.DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                self.animateThis(view: self.secondBlock, isRestoring: true)
+            }
+            
+            Dispatch.DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                self.animateThis(view: self.thirdBlock, isRestoring: true)
+            }
+            
+        }, completion: nil)
+    }
+    
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -87,6 +135,8 @@ class AmbiCell: UICollectionViewCell {
         name.numberOfLines = 0
         name.textAlignment = .center
         
+        name.font = UIFont.systemFont(ofSize: 16)
+        
         name.snp.makeConstraints { make in
             make.top.equalTo(firstBlock.snp.bottom).offset(8)
             make.bottom.equalTo(contentView.snp.bottom)
@@ -115,5 +165,16 @@ class AmbiCell: UICollectionViewCell {
             contentView.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
+    }
+    
+    // MARK: - Animation
+    func animateThis(view: UIView, isRestoring: Bool) {
+        UIView.animate(withDuration: 0.35, delay: 0, options: [.beginFromCurrentState, .curveEaseInOut], animations: {
+            if isRestoring {
+                view.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
+            } else {
+                view.transform = .identity
+            }
+        }, completion: nil)
     }
 }
