@@ -16,6 +16,13 @@ extension UIView {
             addSubview(view)
         }
     }
+    
+    func addShadow(color: CGColor, opacity: Float, shadowOffset: CGSize, shadowRadius: CGFloat) {
+        self.layer.shadowColor = color
+        self.layer.shadowOpacity = opacity
+        self.layer.shadowOffset = shadowOffset
+        self.layer.shadowRadius = shadowRadius
+    }
 }
 
 // MARK: - UIViewController and Safari

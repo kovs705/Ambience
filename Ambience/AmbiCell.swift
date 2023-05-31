@@ -23,7 +23,7 @@ class AmbiCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        contentView.backgroundColor = .green
+        
     }
     
     
@@ -46,14 +46,22 @@ class AmbiCell: UICollectionViewCell {
     
     private func configureFirstB(_ ambience: Ambience) {
         firstBlock.snp.makeConstraints { make in
-            make.centerX.centerY.equalTo(contentView)
-            make.height.width.equalTo(contentView).inset(10)
+            
+            make.top.equalTo(contentView).offset(12)
+            make.leading.trailing.equalTo(contentView).inset(3)
+            
+            make.height.equalTo(165)
+            //make.width.equalTo(contentView).inset(5)
         }
         
         firstBlock.layer.cornerRadius = 15
+        firstBlock.addShadow(color: UIColor.black.cgColor, opacity: 0.3, shadowOffset: CGSize(width: 0, height: 5), shadowRadius: 10)
         imageView.layer.cornerRadius = 16
         imageView.layer.masksToBounds = true
         
+        contentView.bringSubviewToFront(thirdBlock)
+        contentView.bringSubviewToFront(secondBlock)
+        contentView.bringSubviewToFront(firstBlock)
     }
     
     private func configureOtherB(_ ambience: Ambience) {
@@ -64,24 +72,26 @@ class AmbiCell: UICollectionViewCell {
         thirdBlock.layer.cornerRadius = 15
         
         secondBlock.snp.makeConstraints { make in
-            make.centerX.equalTo(contentView)
-            make.centerY.equalTo(contentView)
-            make.height.width.equalTo(85)
+            make.leading.trailing.equalTo(contentView).inset(9)
+            make.top.equalTo(firstBlock.snp.top).offset(-6)
+            make.bottom.equalTo(firstBlock.snp.bottom).inset(15)
         }
         
         thirdBlock.snp.makeConstraints { make in
-            make.centerX.equalTo(contentView)
-            make.centerY.equalTo(contentView).offset(-offset * 2)
-            make.height.width.equalTo(60)
+            make.leading.trailing.equalTo(contentView).inset(18)
+            make.top.equalTo(secondBlock.snp.top).offset(-6)
+            make.bottom.equalTo(firstBlock.snp.bottom).inset(15)
         }
     }
     
     func configureName(_ ambience: Ambience) {
         name.text = ambience.name
         name.numberOfLines = 0
+        name.textAlignment = .center
         
         name.snp.makeConstraints { make in
-            make.bottom.equalTo(contentView.snp.bottom).offset(10)
+            make.top.equalTo(firstBlock.snp.bottom).offset(8)
+            make.bottom.equalTo(contentView.snp.bottom)
             make.leading.trailing.equalTo(contentView).offset(5)
         }
         

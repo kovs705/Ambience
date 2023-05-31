@@ -18,7 +18,7 @@ enum UIHelper {
         
         let flowLayout                  = UICollectionViewFlowLayout()
         flowLayout.sectionInset         = UIEdgeInsets(top: padding, left: padding, bottom: padding, right: padding)
-        flowLayout.itemSize             = CGSize(width: itemWidth, height: itemWidth)
+        flowLayout.itemSize             = CGSize(width: itemWidth, height: itemWidth + 30)
         
         return flowLayout
     }

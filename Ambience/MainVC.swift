@@ -18,12 +18,12 @@ class MainVC: UIViewController {
         print("Hello world!")
         
         setupCollectionView()
-        
+        placeCV()
     }
     
     
     private func setupCollectionView() {
-        collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: UIHelper.createTwoColumnLayout(in: view))
+        collectionView = UICollectionView(frame: .zero, collectionViewLayout: UIHelper.createTwoColumnLayout(in: view))
         view.addSubview(collectionView)
 
         collectionView.dataSource = self
@@ -32,17 +32,18 @@ class MainVC: UIViewController {
         
         collectionView.backgroundColor = .systemBackground
         collectionView.alwaysBounceVertical = true
+        collectionView.isScrollEnabled = true
     }
+
     
-//    private func placeCV() {
-//        view.addSubview(collectionView)
-//        collectionView.translatesAutoresizingMaskIntoConstraints = false
-//
-//        collectionView.snp.makeConstraints { make in
-//            make.leading.trailing.equalToSuperview()
-//            make.top.bottom.equalTo(view.safeAreaLayoutGuide)
-//        }
-//    }
+    private func placeCV() {
+        view.addSubview(collectionView)
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+
+        collectionView.snp.makeConstraints { make in
+            make.leading.trailing.top.bottom.equalTo(view)
+        }
+    }
 }
 
 extension MainVC: MainVCViewProtocol {
