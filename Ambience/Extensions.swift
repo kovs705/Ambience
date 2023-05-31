@@ -26,6 +26,23 @@ extension UIView {
     }
 }
 
+// MARK: - UIImage extension
+
+extension UIImage {
+    func blurImage(radius: CGFloat) -> UIImage? {
+        let context = CIContext(options: nil)
+        let imageToBlur = CIImage(image: self)
+        let blurFilter = CIFilter(name: "CIGaussianBlur")
+        blurFilter?.setValue(imageToBlur, forKey: kCIInputImageKey)
+        blurFilter?.setValue(radius, forKey: kCIInputRadiusKey)
+        guard let outputImage = blurFilter?.outputImage,
+              let cgImage = context.createCGImage(outputImage, from: outputImage.extent) else {
+            return nil
+        }
+        return UIImage(cgImage: cgImage)
+    }
+}
+
 // MARK: - UIViewController and Safari
 
 extension UIViewController {

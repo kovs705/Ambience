@@ -82,6 +82,9 @@ extension MainVC: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let ambience = AmbienceManager().all[indexPath.row]
         let coordinator = Builder()
-        navigationController?.pushViewController(coordinator.getDetailModule(ambience: ambience), animated: true)
+        let vc = coordinator.getDetailModule(ambience: ambience)
+        vc.modalTransitionStyle = .coverVertical
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true)
     }
 }
