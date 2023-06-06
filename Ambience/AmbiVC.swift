@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import AVFoundation
 
 class AmbiVC: UIViewController {
     
@@ -22,13 +23,15 @@ class AmbiVC: UIViewController {
     
     private var showMore = UIButton() // more sounds on MixKit
     
+    var player: AVAudioPlayer?
+    var isPlaying: Bool = false
     
     // MARK: - viewDidLoad
     override func viewDidLoad() {
         
         let swipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipeGesture(_:)))
         swipeGesture.direction = .down
-        self.imageView.addGestureRecognizer(swipeGesture)
+        view.addGestureRecognizer(swipeGesture)
         
         imageView.backgroundColor = .black
         ambienceImage.backgroundColor = .black
@@ -103,6 +106,14 @@ class AmbiVC: UIViewController {
         closeB.tintColor = .systemGray6
     }
     
+    func configureSoundB() {
+        let config = UIImage.SymbolConfiguration(pointSize: 45, weight: .semibold)
+        soundB.setImage(UIImage(systemName: "pause.fill", withConfiguration: config), for: .normal)
+        soundB.addTarget(self, action: #selector(playPause), for: .touchUpInside)
+        
+        
+    }
+    
     // MARK: - Swipe gesture
     @objc func handleSwipeGesture(_ sender: UISwipeGestureRecognizer) {
         if sender.direction == .down {
@@ -114,6 +125,50 @@ class AmbiVC: UIViewController {
     
     @objc func dismissView() {
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    @objc func playPause() {
+        if !isPlaying {
+            
+            play()
+        } else {
+            
+            stop()
+        }
+    }
+    
+    // MARK: - AVPlayer
+    func play() {
+        guard let sound = presenter.ambience?.pathToSound else { return }
+        let path = Bundle.main.path(forResource: sound, ofType: nil)!
+        let url = URL(fileURLWithPath: path)
+        
+        let session = AVAudioSession.sharedInstance()
+        do {
+            player = try AVAudioPlayer(contentsOf: url)
+            player?.numberOfLoops = 50
+            
+            try session.setCategory(.playback, mode: .default)
+            try session.setActive(true)
+            
+            let currentVolume = session.outputVolume
+            var num = 0.0
+            for _ in 1...10 {
+                num += 0.1
+                DispatchQueue.main.asyncAfter(deadline: .now() + num) {
+                    self.player?.volume = currentVolume + 0.1
+                }
+            }
+            
+            
+            player?.play()
+        } catch {
+            fatalError("Couldn't load file")
+        }
+    }
+    
+    func stop() {
+        player?.stop()
     }
     
 }

@@ -25,7 +25,8 @@ final class Builder: BuilderProtocol {
     
     func getDetailModule(ambience: Ambience) -> UIViewController {
         let view = AmbiVC()
-        let presenter = AmbiPresenter(view: view, ambience: ambience)
+        let ambienceManager = AmbienceManager()
+        let presenter = AmbiPresenter(view: view, ambience: ambience, ambiences: ambienceManager)
         view.presenter = presenter
         return view
     }

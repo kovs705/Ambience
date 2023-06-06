@@ -12,6 +12,7 @@ struct Ambience {
     let firstColor: UIColor
     let secondColor: UIColor
     let image: String
+    let pathToSound: String
     
     // other stuff to come..
 }
