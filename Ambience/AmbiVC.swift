@@ -33,6 +33,7 @@ class AmbiVC: UIViewController {
         swipeGesture.direction = .down
         view.addGestureRecognizer(swipeGesture)
         
+        view.backgroundColor = .black
         imageView.backgroundColor = .black
         ambienceImage.backgroundColor = .black
         
@@ -41,6 +42,8 @@ class AmbiVC: UIViewController {
         placeAmbienceImage()
         
         placeCloseB()
+        placeSoundB()
+        placeShuffleB()
         
         setAmbience(ambience: presenter.ambience)
     }
@@ -48,9 +51,7 @@ class AmbiVC: UIViewController {
     
     // MARK: - Other funcs
     func configureUI() {
-        view.addSubviews(imageView, ambienceImage, closeB)
-        
-        closeB.addTarget(self, action: #selector(dismissView), for: .touchUpInside)
+        view.addSubviews(imageView, ambienceImage, closeB, soundB, shuffleB)
     }
     
     func placeImageView() {
@@ -101,30 +102,34 @@ class AmbiVC: UIViewController {
             make.leading.equalTo(view).inset(25)
         }
         
-        let config = UIImage.SymbolConfiguration(pointSize: 25, weight: .semibold)
-        closeB.setImage(UIImage(systemName: "xmark.circle.fill", withConfiguration: config), for: .normal)
+        closeB.setImage(UIImage(systemName: "xmark.circle.fill", withConfiguration: UIHelper.giveConfigForImage(size: 25, weight: .semibold)), for: .normal)
+        closeB.addTarget(self, action: #selector(dismissView), for: .touchUpInside)
         closeB.tintColor = .systemGray6
     }
     
-    func configureSoundB() {
-        let config = UIImage.SymbolConfiguration(pointSize: 45, weight: .semibold)
-        soundB.setImage(UIImage(systemName: "pause.fill", withConfiguration: config), for: .normal)
+    func placeSoundB() {
+        soundB.setImage(UIImage(systemName: "pause.fill", withConfiguration: UIHelper.giveConfigForImage(size: 45, weight: .semibold)), for: .normal)
         soundB.addTarget(self, action: #selector(playPause), for: .touchUpInside)
+        soundB.tintColor = .systemGray5
         
-        
-    }
-    
-    // MARK: - Swipe gesture
-    @objc func handleSwipeGesture(_ sender: UISwipeGestureRecognizer) {
-        if sender.direction == .down {
-            // Handle the gesture direction
-            // For example, dismiss the view controller
-            self.dismiss(animated: true, completion: nil)
+        soundB.snp.makeConstraints { make in
+            make.top.equalTo(ambienceImage.snp.bottom).offset(100)
+            make.centerX.equalTo(view)
         }
     }
     
-    @objc func dismissView() {
-        dismiss(animated: true, completion: nil)
+    func placeShuffleB() {
+        shuffleB.setImage(UIImage(systemName: "shuffle", withConfiguration: UIHelper.giveConfigForImage(size: 30, weight: .semibold)), for: .normal)
+        shuffleB.addTarget(self, action: #selector(shuffle), for: .touchUpInside)
+        shuffleB.tintColor = .systemGray5
+        
+        shuffleB.snp.makeConstraints { make in
+            make.top.equalTo(ambienceImage.snp.bottom).offset(107)
+            make.leading.equalTo(soundB.snp.trailing).offset(40)
+        }
+    }
+    
+    func optimizeClose() {
         DispatchQueue.main.asyncAfter(deadline: .now()) { [weak self] in
             guard let self = self else { return }
             self.imageView.image = nil
@@ -135,48 +140,25 @@ class AmbiVC: UIViewController {
         }
     }
     
+    // MARK: - Obj-c funcs
+    @objc func handleSwipeGesture(_ sender: UISwipeGestureRecognizer) {
+        if sender.direction == .down {
+            dismiss(animated: true, completion: nil)
+            optimizeClose()
+        }
+    }
+    
+    @objc func dismissView() {
+        dismiss(animated: true, completion: nil)
+        optimizeClose()
+    }
+    
     @objc func playPause() {
-        if !isPlaying {
-            
-            play()
-        } else {
-            
-            stop()
-        }
+        presenter.playPause()
     }
     
-    // MARK: - AVPlayer
-    func play() {
-        guard let sound = presenter.ambience?.pathToSound else { return }
-        let path = Bundle.main.path(forResource: sound, ofType: nil)!
-        let url = URL(fileURLWithPath: path)
-        
-        let session = AVAudioSession.sharedInstance()
-        do {
-            player = try AVAudioPlayer(contentsOf: url)
-            player?.numberOfLoops = 50
-            
-            try session.setCategory(.playback, mode: .default)
-            try session.setActive(true)
-            
-            let currentVolume = session.outputVolume
-//            var num = 0.0
-            for _ in 1...10 {
-//                num += 0.1
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                    self.player?.volume = currentVolume + 0.1
-                }
-            }
-            
-            
-            player?.play()
-        } catch {
-            fatalError("Couldn't load file")
-        }
-    }
-    
-    func stop() {
-        player?.stop()
+    @objc func shuffle() {
+        presenter.shuffle()
     }
     
 }

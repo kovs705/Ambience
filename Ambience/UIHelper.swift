@@ -31,5 +31,10 @@ enum UIHelper {
         
         return animation
     }
+    
+    static func giveConfigForImage(size: CGFloat, weight: UIImage.SymbolWeight) -> UIImage.SymbolConfiguration {
+        let config = UIImage.SymbolConfiguration(pointSize: size, weight: weight)
+        return config
+    }
 }
 
