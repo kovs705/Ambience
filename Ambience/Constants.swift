@@ -32,6 +32,26 @@ enum Colors {
         static let one = "UrbanC1"
         static let two = "UrbanC2"
     }
+    
+    enum WarmCampfire {
+        static let one = "WarmC1"
+        static let two = "WarmC2"
+    }
+    
+    enum SeaWaves {
+        static let one = "SeaW1"
+        static let two = "SeaW2"
+    }
+    
+    enum Magic {
+        static let one = "Magic1"
+        static let two = "Magic2"
+    }
+    
+    enum CalmUnderwater {
+        static let one = "CalmU1"
+        static let two = "CalmU2"
+    }
 }
 
 enum Images {
@@ -40,4 +60,8 @@ enum Images {
     static let peacefullNight = "PeacefullNight"
     static let silentWinter = "SilentWinter"
     static let urbanCity = "UrbanCity"
+    static let magic = "Magic"
+    static let calmUnderwater = "CalmUnderwater"
+    static let seaWaves = "SeaWaves"
+    static let warmCampfire = "WarmCampfire"
 }

@@ -124,7 +124,15 @@ class AmbiVC: UIViewController {
     }
     
     @objc func dismissView() {
-        self.dismiss(animated: true, completion: nil)
+        dismiss(animated: true, completion: nil)
+        DispatchQueue.main.asyncAfter(deadline: .now()) { [weak self] in
+            guard let self = self else { return }
+            self.imageView.image = nil
+            self.ambienceImage.image = nil
+            
+            self.imageView.layer.add(UIHelper.giveOpacityAnimation(duration: 0.4, from: 1, toValue: 0), forKey: "opacityAnimation")
+            self.ambienceImage.layer.add(UIHelper.giveOpacityAnimation(duration: 0.4, from: 1, toValue: 0), forKey: "opacityAnimation")
+        }
     }
     
     @objc func playPause() {
@@ -152,10 +160,10 @@ class AmbiVC: UIViewController {
             try session.setActive(true)
             
             let currentVolume = session.outputVolume
-            var num = 0.0
+//            var num = 0.0
             for _ in 1...10 {
-                num += 0.1
-                DispatchQueue.main.asyncAfter(deadline: .now() + num) {
+//                num += 0.1
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                     self.player?.volume = currentVolume + 0.1
                 }
             }
@@ -179,9 +187,13 @@ extension AmbiVC: AmbiViewProtocol {
     
     func setAmbience(ambience: Ambience?) {
         guard let image = ambience?.image else { return }
-        DispatchQueue.main.async {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) { [weak self] in
+            guard let self = self else { return }
             self.imageView.image = UIImage(named: image)
             self.ambienceImage.image = UIImage(named: image)
+            
+            self.imageView.layer.add(UIHelper.giveOpacityAnimation(duration: 1, from: 0, toValue: 1), forKey: "opacityAnimation")
+            self.ambienceImage.layer.add(UIHelper.giveOpacityAnimation(duration: 1, from: 0, toValue: 1), forKey: "opacityAnimation")
         }
     }
     

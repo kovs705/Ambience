@@ -22,5 +22,14 @@ enum UIHelper {
         
         return flowLayout
     }
+    
+    static func giveOpacityAnimation(duration: Double, from value: Int, toValue: Int) -> CABasicAnimation {
+        let animation = CABasicAnimation(keyPath: "opacity")
+        animation.fromValue = value
+        animation.toValue = toValue
+        animation.duration = CFTimeInterval(duration)
+        
+        return animation
+    }
 }
 
