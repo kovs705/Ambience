@@ -118,7 +118,6 @@
 				4E1860EC2A23C00600C8D215 /* Managers */,
 				4E1860E42A23B6B600C8D215 /* UIHelper */,
 				4E1860DB2A23B11F00C8D215 /* Model */,
-				4E1860EF2A23C3BA00C8D215 /* Constants.swift */,
 			);
 			name = "Business logic layer";
 			sourceTree = "<group>";
@@ -172,6 +171,7 @@
 			children = (
 				4E1860E52A23B6CA00C8D215 /* UIHelper.swift */,
 				4E1860F42A24BFE900C8D215 /* Extensions.swift */,
+				4E1860EF2A23C3BA00C8D215 /* Constants.swift */,
 			);
 			name = UIHelper;
 			sourceTree = "<group>";
