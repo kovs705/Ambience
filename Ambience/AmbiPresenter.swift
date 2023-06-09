@@ -16,6 +16,8 @@ protocol AmbiViewProtocol: AnyObject {
     
     func givePlayPauseImage()
     func optimizeClose()
+    
+    func shuffleIt()
 }
 
 protocol AmbiPresenterProtocol: AnyObject {
@@ -100,6 +102,9 @@ final class AmbiPresenter: AmbiPresenterProtocol {
     }
     
     func shuffle() {
+        guard let shuffledAmbience = ambiences?.all.randomElement() else { return }
+        ambience = shuffledAmbience
+        view?.shuffleIt()
         print("Shuffled")
     }
     

@@ -195,4 +195,12 @@ extension AmbiVC: AmbiViewProtocol {
         }
     }
     
+    func shuffleIt() {
+        if isPlaying {
+            playPause()
+            givePlayPauseImage()
+        }
+        setAmbience(ambience: presenter?.ambience)
+    }
+    
 }
