@@ -38,13 +38,7 @@ class AmbiVC: UIViewController {
         ambienceImage.backgroundColor = .black
         
         configureUI()
-        placeImageView()
-        placeAmbienceImage()
-        
-        placeCloseB()
-        placeSoundB()
-        givePlayPauseImage()
-        placeShuffleB()
+        configureButtons()
         
         setAmbience(ambience: presenter.ambience)
     }
@@ -53,6 +47,16 @@ class AmbiVC: UIViewController {
     // MARK: - Other funcs
     func configureUI() {
         view.addSubviews(imageView, ambienceImage, closeB, soundB, shuffleB)
+        placeImageView()
+        placeAmbienceImage()
+    }
+    
+    func configureButtons() {
+        placeCloseB()
+        placeSoundB()
+        placeShuffleB()
+        
+        givePlayPauseImage()
     }
     
     func placeImageView() {
@@ -140,13 +144,7 @@ class AmbiVC: UIViewController {
         }
     }
     
-    func givePlayPauseImage() {
-        if isPlaying {
-            soundB.setImage(UIImage(systemName: "pause.fill", withConfiguration: UIHelper.giveConfigForImage(size: 45, weight: .semibold)), for: .normal)
-        } else {
-            soundB.setImage(UIImage(systemName: "play.fill", withConfiguration: UIHelper.giveConfigForImage(size: 45, weight: .semibold)), for: .normal)
-        }
-    }
+    
     
     // MARK: - Obj-c funcs
     @objc func handleSwipeGesture(_ sender: UISwipeGestureRecognizer) {
@@ -163,9 +161,6 @@ class AmbiVC: UIViewController {
     
     @objc func playPause() {
         presenter.playPause()
-        givePlayPauseImage()
-        soundB.layoutIfNeeded()
-        soundB.layoutSubviews()
     }
     
     @objc func shuffle() {
@@ -187,6 +182,17 @@ extension AmbiVC: AmbiViewProtocol {
             
             self.imageView.layer.add(UIHelper.giveOpacityAnimation(duration: 1, from: 0, toValue: 1), forKey: "opacityAnimation")
             self.ambienceImage.layer.add(UIHelper.giveOpacityAnimation(duration: 1, from: 0, toValue: 1), forKey: "opacityAnimation")
+        }
+    }
+    
+    func givePlayPauseImage() {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            if self.isPlaying {
+                self.soundB.setImage(UIImage(systemName: "pause.fill", withConfiguration: UIHelper.giveConfigForImage(size: 45, weight: .semibold)), for: .normal)
+            } else {
+                self.soundB.setImage(UIImage(systemName: "play.fill", withConfiguration: UIHelper.giveConfigForImage(size: 45, weight: .semibold)), for: .normal)
+            }
         }
     }
     

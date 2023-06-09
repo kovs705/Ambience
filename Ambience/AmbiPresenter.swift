@@ -13,6 +13,8 @@ protocol AmbiViewProtocol: AnyObject {
     
     var isPlaying: Bool { get set }
     var player: AVAudioPlayer? { get set }
+    
+    func givePlayPauseImage()
 }
 
 protocol AmbiPresenterProtocol: AnyObject {
@@ -70,15 +72,15 @@ final class AmbiPresenter: AmbiPresenterProtocol {
             guard let path = Bundle.main.url(forResource: sound, withExtension: "mp3") else { return }
             print("Success")
             do {
-                self.player = try AVAudioPlayer(contentsOf: path)
+                try self.player = AVAudioPlayer(contentsOf: path)
                 self.player?.numberOfLoops = 50
     
                 self.player?.prepareToPlay()
                 self.player?.volume = 1.0
                 
-                self.player?.setVolume(1.0, fadeDuration: 1)
-                self.view?.isPlaying = true
                 self.player?.play()
+                self.view?.isPlaying = true
+                self.view?.givePlayPauseImage()
             } catch {
                 fatalError("Couldn't load file")
             }
@@ -92,6 +94,7 @@ final class AmbiPresenter: AmbiPresenterProtocol {
             self.player?.setVolume(0, fadeDuration: 2)
             self.player?.stop()
             self.view?.isPlaying = false
+            self.view?.givePlayPauseImage()
         }
     }
     
