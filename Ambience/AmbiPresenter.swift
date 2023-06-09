@@ -16,7 +16,7 @@ protocol AmbiViewProtocol: AnyObject {
 }
 
 protocol AmbiPresenterProtocol: AnyObject {
-    init(view: AmbiViewProtocol, ambience: Ambience?, ambiences: AmbienceManagerProtocol?)
+    init(view: AmbiViewProtocol, ambience: Ambience?, ambiences: AmbienceManagerProtocol?, player: AVAudioPlayer?)
     var ambience: Ambience? { get }
     var ambiences: AmbienceManagerProtocol? { get }
     
@@ -39,10 +39,11 @@ final class AmbiPresenter: AmbiPresenterProtocol {
     
     var player: AVAudioPlayer?
     
-    required init(view: AmbiViewProtocol, ambience: Ambience?, ambiences: AmbienceManagerProtocol?) {
+    required init(view: AmbiViewProtocol, ambience: Ambience?, ambiences: AmbienceManagerProtocol?, player: AVAudioPlayer?) {
         self.view = view
         self.ambience = ambience
         self.ambiences = ambiences
+        self.player = player
     }
     
     func setAmbience(ambience: Ambience?) {
@@ -54,43 +55,44 @@ final class AmbiPresenter: AmbiPresenterProtocol {
     func playPause() {
         if view?.isPlaying == true {
             stop()
+            print("pause")
         } else {
+            print("play")
             play()
         }
     }
     
     func play() {
         guard let sound = ambience?.pathToSound else { return }
-        let path = Bundle.main.path(forResource: sound, ofType: nil)!
-        let url = URL(fileURLWithPath: path)
         
-        let session = AVAudioSession.sharedInstance()
-        do {
-            view?.player? = try AVAudioPlayer(contentsOf: url)
-            view?.player?.numberOfLoops = 50
-            
-            try session.setCategory(.playback, mode: .default)
-            try session.setActive(true)
-            
-            let currentVolume = session.outputVolume
-//            var num = 0.0
-            for _ in 1...10 {
-//                num += 0.1
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
-                    guard let self = self else { return }
-                    self.view?.player?.volume = currentVolume + 0.1
-                }
+        DispatchQueue.global().async { [weak self] in
+            guard let self = self else { return }
+            guard let path = Bundle.main.url(forResource: sound, withExtension: "mp3") else { return }
+            print("Success")
+            do {
+                self.player = try AVAudioPlayer(contentsOf: path)
+                self.player?.numberOfLoops = 50
+    
+                self.player?.prepareToPlay()
+                self.player?.volume = 1.0
+                
+                self.player?.setVolume(1.0, fadeDuration: 1)
+                self.view?.isPlaying = true
+                self.player?.play()
+            } catch {
+                fatalError("Couldn't load file")
             }
-            
-            
-            self.view?.player?.play()
-        } catch {
-            fatalError("Couldn't load file")
         }
+
     }
     
     func stop() {
-        view?.player?.stop()
+        DispatchQueue.global().async { [weak self] in
+            guard let self = self else { return }
+            self.player?.setVolume(0, fadeDuration: 2)
+            self.player?.stop()
+            self.view?.isPlaying = false
+        }
     }
     
     func shuffle() {

@@ -43,6 +43,7 @@ class AmbiVC: UIViewController {
         
         placeCloseB()
         placeSoundB()
+        givePlayPauseImage()
         placeShuffleB()
         
         setAmbience(ambience: presenter.ambience)
@@ -108,7 +109,6 @@ class AmbiVC: UIViewController {
     }
     
     func placeSoundB() {
-        soundB.setImage(UIImage(systemName: "pause.fill", withConfiguration: UIHelper.giveConfigForImage(size: 45, weight: .semibold)), for: .normal)
         soundB.addTarget(self, action: #selector(playPause), for: .touchUpInside)
         soundB.tintColor = .systemGray5
         
@@ -140,6 +140,14 @@ class AmbiVC: UIViewController {
         }
     }
     
+    func givePlayPauseImage() {
+        if isPlaying {
+            soundB.setImage(UIImage(systemName: "pause.fill", withConfiguration: UIHelper.giveConfigForImage(size: 45, weight: .semibold)), for: .normal)
+        } else {
+            soundB.setImage(UIImage(systemName: "play.fill", withConfiguration: UIHelper.giveConfigForImage(size: 45, weight: .semibold)), for: .normal)
+        }
+    }
+    
     // MARK: - Obj-c funcs
     @objc func handleSwipeGesture(_ sender: UISwipeGestureRecognizer) {
         if sender.direction == .down {
@@ -155,6 +163,9 @@ class AmbiVC: UIViewController {
     
     @objc func playPause() {
         presenter.playPause()
+        givePlayPauseImage()
+        soundB.layoutIfNeeded()
+        soundB.layoutSubviews()
     }
     
     @objc func shuffle() {

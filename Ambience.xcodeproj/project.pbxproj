@@ -26,6 +26,14 @@
 		4E4A04742A234CF900F6CD93 /* AmbienceUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E4A04732A234CF900F6CD93 /* AmbienceUITestsLaunchTests.swift */; };
 		4E8776EE2A26FA5F004E3AF9 /* AmbiVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8776ED2A26FA5F004E3AF9 /* AmbiVC.swift */; };
 		4E8776F02A26FA6E004E3AF9 /* AmbiPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8776EF2A26FA6E004E3AF9 /* AmbiPresenter.swift */; };
+		4ECFE9E12A322FFB0025C446 /* BlueForestAmbi.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4ECFE9E02A322FFB0025C446 /* BlueForestAmbi.mp3 */; };
+		4ECFE9E32A3230120025C446 /* CalmUnderwaterAmbi.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4ECFE9E22A3230120025C446 /* CalmUnderwaterAmbi.mp3 */; };
+		4ECFE9E52A3230310025C446 /* MagicAmbi.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4ECFE9E42A3230310025C446 /* MagicAmbi.mp3 */; };
+		4ECFE9E72A3232D00025C446 /* PeacefullNightAmbi.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4ECFE9E62A3232D00025C446 /* PeacefullNightAmbi.mp3 */; };
+		4ECFE9E92A3232DA0025C446 /* SeaWavesAmbi.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4ECFE9E82A3232DA0025C446 /* SeaWavesAmbi.mp3 */; };
+		4ECFE9ED2A3233BB0025C446 /* SilentWinterAmbi.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4ECFE9EC2A3233BB0025C446 /* SilentWinterAmbi.mp3 */; };
+		4ECFE9F12A32357D0025C446 /* UrbanCityAmbi.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4ECFE9F02A32357C0025C446 /* UrbanCityAmbi.mp3 */; };
+		4ECFE9F32A32358E0025C446 /* WarmCampfireAmbi.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4ECFE9F22A32358E0025C446 /* WarmCampfireAmbi.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +76,14 @@
 		4E4A04732A234CF900F6CD93 /* AmbienceUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmbienceUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		4E8776ED2A26FA5F004E3AF9 /* AmbiVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmbiVC.swift; sourceTree = "<group>"; };
 		4E8776EF2A26FA6E004E3AF9 /* AmbiPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmbiPresenter.swift; sourceTree = "<group>"; };
+		4ECFE9E02A322FFB0025C446 /* BlueForestAmbi.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = BlueForestAmbi.mp3; sourceTree = "<group>"; };
+		4ECFE9E22A3230120025C446 /* CalmUnderwaterAmbi.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = CalmUnderwaterAmbi.mp3; sourceTree = "<group>"; };
+		4ECFE9E42A3230310025C446 /* MagicAmbi.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = MagicAmbi.mp3; sourceTree = "<group>"; };
+		4ECFE9E62A3232D00025C446 /* PeacefullNightAmbi.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = PeacefullNightAmbi.mp3; sourceTree = "<group>"; };
+		4ECFE9E82A3232DA0025C446 /* SeaWavesAmbi.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = SeaWavesAmbi.mp3; sourceTree = "<group>"; };
+		4ECFE9EC2A3233BB0025C446 /* SilentWinterAmbi.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = SilentWinterAmbi.mp3; sourceTree = "<group>"; };
+		4ECFE9F02A32357C0025C446 /* UrbanCityAmbi.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = UrbanCityAmbi.mp3; sourceTree = "<group>"; };
+		4ECFE9F22A32358E0025C446 /* WarmCampfireAmbi.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = WarmCampfireAmbi.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,6 +152,7 @@
 		4E1860DB2A23B11F00C8D215 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				4ECFE9D62A322F950025C446 /* Sounds */,
 				4E1860EA2A23BCDE00C8D215 /* Ambience.swift */,
 			);
 			name = Model;
@@ -243,6 +260,93 @@
 				4E8776EF2A26FA6E004E3AF9 /* AmbiPresenter.swift */,
 			);
 			name = AmbiVC;
+			sourceTree = "<group>";
+		};
+		4ECFE9D62A322F950025C446 /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				4ECFE9DF2A322FEB0025C446 /* WarmCampfire */,
+				4ECFE9DE2A322FE40025C446 /* UrbanCity */,
+				4ECFE9DD2A322FDC0025C446 /* SilentWinter */,
+				4ECFE9DC2A322FD50025C446 /* SeaWaves */,
+				4ECFE9DB2A322FCD0025C446 /* PeacefullNight */,
+				4ECFE9DA2A322FC70025C446 /* Magic */,
+				4ECFE9D92A322FAE0025C446 /* HighestMount */,
+				4ECFE9D82A322FA70025C446 /* CalmUnder */,
+				4ECFE9D72A322F9F0025C446 /* BlueForest */,
+			);
+			name = Sounds;
+			sourceTree = "<group>";
+		};
+		4ECFE9D72A322F9F0025C446 /* BlueForest */ = {
+			isa = PBXGroup;
+			children = (
+				4ECFE9E02A322FFB0025C446 /* BlueForestAmbi.mp3 */,
+			);
+			name = BlueForest;
+			sourceTree = "<group>";
+		};
+		4ECFE9D82A322FA70025C446 /* CalmUnder */ = {
+			isa = PBXGroup;
+			children = (
+				4ECFE9E22A3230120025C446 /* CalmUnderwaterAmbi.mp3 */,
+			);
+			name = CalmUnder;
+			sourceTree = "<group>";
+		};
+		4ECFE9D92A322FAE0025C446 /* HighestMount */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = HighestMount;
+			sourceTree = "<group>";
+		};
+		4ECFE9DA2A322FC70025C446 /* Magic */ = {
+			isa = PBXGroup;
+			children = (
+				4ECFE9E42A3230310025C446 /* MagicAmbi.mp3 */,
+			);
+			name = Magic;
+			sourceTree = "<group>";
+		};
+		4ECFE9DB2A322FCD0025C446 /* PeacefullNight */ = {
+			isa = PBXGroup;
+			children = (
+				4ECFE9E62A3232D00025C446 /* PeacefullNightAmbi.mp3 */,
+			);
+			name = PeacefullNight;
+			sourceTree = "<group>";
+		};
+		4ECFE9DC2A322FD50025C446 /* SeaWaves */ = {
+			isa = PBXGroup;
+			children = (
+				4ECFE9E82A3232DA0025C446 /* SeaWavesAmbi.mp3 */,
+			);
+			name = SeaWaves;
+			sourceTree = "<group>";
+		};
+		4ECFE9DD2A322FDC0025C446 /* SilentWinter */ = {
+			isa = PBXGroup;
+			children = (
+				4ECFE9EC2A3233BB0025C446 /* SilentWinterAmbi.mp3 */,
+			);
+			name = SilentWinter;
+			sourceTree = "<group>";
+		};
+		4ECFE9DE2A322FE40025C446 /* UrbanCity */ = {
+			isa = PBXGroup;
+			children = (
+				4ECFE9F02A32357C0025C446 /* UrbanCityAmbi.mp3 */,
+			);
+			name = UrbanCity;
+			sourceTree = "<group>";
+		};
+		4ECFE9DF2A322FEB0025C446 /* WarmCampfire */ = {
+			isa = PBXGroup;
+			children = (
+				4ECFE9F22A32358E0025C446 /* WarmCampfireAmbi.mp3 */,
+			);
+			name = WarmCampfire;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -355,8 +459,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4ECFE9E72A3232D00025C446 /* PeacefullNightAmbi.mp3 in Resources */,
+				4ECFE9E12A322FFB0025C446 /* BlueForestAmbi.mp3 in Resources */,
 				4E4A045D2A234CF900F6CD93 /* LaunchScreen.storyboard in Resources */,
+				4ECFE9F32A32358E0025C446 /* WarmCampfireAmbi.mp3 in Resources */,
+				4ECFE9ED2A3233BB0025C446 /* SilentWinterAmbi.mp3 in Resources */,
+				4ECFE9E52A3230310025C446 /* MagicAmbi.mp3 in Resources */,
+				4ECFE9E92A3232DA0025C446 /* SeaWavesAmbi.mp3 in Resources */,
 				4E4A045A2A234CF900F6CD93 /* Assets.xcassets in Resources */,
+				4ECFE9F12A32357D0025C446 /* UrbanCityAmbi.mp3 in Resources */,
+				4ECFE9E32A3230120025C446 /* CalmUnderwaterAmbi.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

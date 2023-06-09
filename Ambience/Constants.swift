@@ -54,6 +54,19 @@ enum Colors {
     }
 }
 
+enum Sounds {
+    static let warmCampfire = "WarmCampfireAmbi"
+    static let urbanCity = "UrbanCityAmbi"
+    static let silentWinter = "SilentWinterAmbi"
+    static let seaWaves = "SeaWavesAmbi"
+    static let peacefullNight = "PeacefullNightAmbi"
+    static let magic = "MagicAmbi"
+    static let highestMountains = "HighestMountainsAmbi"
+    static let calmUnderwater = "CalmUnderwaterAmbi"
+    static let blueForest = "BlueForestAmbi"
+    
+}
+
 enum Images {
     static let blueForest = "BlueForest"
     static let highestMountains = "HighestMountains"

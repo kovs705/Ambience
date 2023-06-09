@@ -150,13 +150,13 @@ class AmbiCell: UICollectionViewCell {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         
         imageView.image = UIImage(named: ambience.image)
+        imageView.contentMode = .scaleAspectFill
         imageView.snp.makeConstraints { make in
             make.leading.trailing.top.bottom.equalTo(firstBlock)
         }
         
         imageView.layer.cornerRadius = 16
         imageView.layer.masksToBounds = true
-        imageView.contentMode = .scaleToFill
     }
     
     private func addSubviews() {
