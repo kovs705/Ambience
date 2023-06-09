@@ -133,18 +133,6 @@ class AmbiVC: UIViewController {
         }
     }
     
-    func optimizeClose() {
-        DispatchQueue.main.asyncAfter(deadline: .now()) { [weak self] in
-            guard let self = self else { return }
-            self.imageView.image = nil
-            self.ambienceImage.image = nil
-            
-            self.imageView.layer.add(UIHelper.giveOpacityAnimation(duration: 0.4, from: 1, toValue: 0), forKey: "opacityAnimation")
-            self.ambienceImage.layer.add(UIHelper.giveOpacityAnimation(duration: 0.4, from: 1, toValue: 0), forKey: "opacityAnimation")
-        }
-    }
-    
-    
     
     // MARK: - Obj-c funcs
     @objc func handleSwipeGesture(_ sender: UISwipeGestureRecognizer) {
@@ -193,6 +181,17 @@ extension AmbiVC: AmbiViewProtocol {
             } else {
                 self.soundB.setImage(UIImage(systemName: "play.fill", withConfiguration: UIHelper.giveConfigForImage(size: 45, weight: .semibold)), for: .normal)
             }
+        }
+    }
+    
+    func optimizeClose() {
+        DispatchQueue.main.asyncAfter(deadline: .now()) { [weak self] in
+            guard let self = self else { return }
+            self.imageView.image = nil
+            self.ambienceImage.image = nil
+            
+            self.imageView.layer.add(UIHelper.giveOpacityAnimation(duration: 0.4, from: 1, toValue: 0), forKey: "opacityAnimation")
+            self.ambienceImage.layer.add(UIHelper.giveOpacityAnimation(duration: 0.4, from: 1, toValue: 0), forKey: "opacityAnimation")
         }
     }
     

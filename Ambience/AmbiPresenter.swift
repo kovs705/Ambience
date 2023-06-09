@@ -15,6 +15,7 @@ protocol AmbiViewProtocol: AnyObject {
     var player: AVAudioPlayer? { get set }
     
     func givePlayPauseImage()
+    func optimizeClose()
 }
 
 protocol AmbiPresenterProtocol: AnyObject {
