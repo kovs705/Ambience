@@ -24,6 +24,7 @@
 		4E4A04682A234CF900F6CD93 /* AmbienceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E4A04672A234CF900F6CD93 /* AmbienceTests.swift */; };
 		4E4A04722A234CF900F6CD93 /* AmbienceUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E4A04712A234CF900F6CD93 /* AmbienceUITests.swift */; };
 		4E4A04742A234CF900F6CD93 /* AmbienceUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E4A04732A234CF900F6CD93 /* AmbienceUITestsLaunchTests.swift */; };
+		4E68C3562A35176B00704A3F /* UnsplashPhotoPicker in Frameworks */ = {isa = PBXBuildFile; productRef = 4E68C3552A35176B00704A3F /* UnsplashPhotoPicker */; };
 		4E8776EE2A26FA5F004E3AF9 /* AmbiVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8776ED2A26FA5F004E3AF9 /* AmbiVC.swift */; };
 		4E8776F02A26FA6E004E3AF9 /* AmbiPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8776EF2A26FA6E004E3AF9 /* AmbiPresenter.swift */; };
 		4ECFE9E12A322FFB0025C446 /* BlueForestAmbi.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4ECFE9E02A322FFB0025C446 /* BlueForestAmbi.mp3 */; };
@@ -34,6 +35,10 @@
 		4ECFE9ED2A3233BB0025C446 /* SilentWinterAmbi.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4ECFE9EC2A3233BB0025C446 /* SilentWinterAmbi.mp3 */; };
 		4ECFE9F12A32357D0025C446 /* UrbanCityAmbi.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4ECFE9F02A32357C0025C446 /* UrbanCityAmbi.mp3 */; };
 		4ECFE9F32A32358E0025C446 /* WarmCampfireAmbi.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4ECFE9F22A32358E0025C446 /* WarmCampfireAmbi.mp3 */; };
+		4EFF69C62A39B6ED0027ED54 /* UnImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EFF69C52A39B6ED0027ED54 /* UnImage.swift */; };
+		4EFF69C92A3A05DB0027ED54 /* DataRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EFF69C82A3A05DB0027ED54 /* DataRequest.swift */; };
+		4EFF69CB2A3A06230027ED54 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EFF69CA2A3A06230027ED54 /* NetworkService.swift */; };
+		4EFF69CD2A3A06440027ED54 /* ErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EFF69CC2A3A06440027ED54 /* ErrorResponse.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,6 +89,10 @@
 		4ECFE9EC2A3233BB0025C446 /* SilentWinterAmbi.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = SilentWinterAmbi.mp3; sourceTree = "<group>"; };
 		4ECFE9F02A32357C0025C446 /* UrbanCityAmbi.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = UrbanCityAmbi.mp3; sourceTree = "<group>"; };
 		4ECFE9F22A32358E0025C446 /* WarmCampfireAmbi.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = WarmCampfireAmbi.mp3; sourceTree = "<group>"; };
+		4EFF69C52A39B6ED0027ED54 /* UnImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnImage.swift; sourceTree = "<group>"; };
+		4EFF69C82A3A05DB0027ED54 /* DataRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataRequest.swift; sourceTree = "<group>"; };
+		4EFF69CA2A3A06230027ED54 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		4EFF69CC2A3A06440027ED54 /* ErrorResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorResponse.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +101,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4E1860F32A23E0C600C8D215 /* SnapKit in Frameworks */,
+				4E68C3562A35176B00704A3F /* UnsplashPhotoPicker in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -151,8 +161,9 @@
 		4E1860DB2A23B11F00C8D215 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				4EFF69C32A39B69A0027ED54 /* Unsplash */,
 				4ECFE9D62A322F950025C446 /* Sounds */,
-				4E1860EA2A23BCDE00C8D215 /* Ambience.swift */,
+				4EFF69C42A39B6AB0027ED54 /* Ambience */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -231,6 +242,7 @@
 			children = (
 				4E1860D82A23B08000C8D215 /* Presentation layer */,
 				4E1860D32A23AF9F00C8D215 /* Business logic layer */,
+				4EFF69C72A3A05C80027ED54 /* Network layer */,
 				4E20278D2A23969900FD6C4D /* Support */,
 			);
 			path = Ambience;
@@ -349,6 +361,32 @@
 			name = WarmCampfire;
 			sourceTree = "<group>";
 		};
+		4EFF69C32A39B69A0027ED54 /* Unsplash */ = {
+			isa = PBXGroup;
+			children = (
+				4EFF69C52A39B6ED0027ED54 /* UnImage.swift */,
+			);
+			name = Unsplash;
+			sourceTree = "<group>";
+		};
+		4EFF69C42A39B6AB0027ED54 /* Ambience */ = {
+			isa = PBXGroup;
+			children = (
+				4E1860EA2A23BCDE00C8D215 /* Ambience.swift */,
+			);
+			name = Ambience;
+			sourceTree = "<group>";
+		};
+		4EFF69C72A3A05C80027ED54 /* Network layer */ = {
+			isa = PBXGroup;
+			children = (
+				4EFF69C82A3A05DB0027ED54 /* DataRequest.swift */,
+				4EFF69CA2A3A06230027ED54 /* NetworkService.swift */,
+				4EFF69CC2A3A06440027ED54 /* ErrorResponse.swift */,
+			);
+			name = "Network layer";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -367,6 +405,7 @@
 			name = Ambience;
 			packageProductDependencies = (
 				4E1860F22A23E0C600C8D215 /* SnapKit */,
+				4E68C3552A35176B00704A3F /* UnsplashPhotoPicker */,
 			);
 			productName = Ambience;
 			productReference = 4E4A044D2A234CF700F6CD93 /* Ambience.app */;
@@ -442,6 +481,7 @@
 			mainGroup = 4E4A04442A234CF700F6CD93;
 			packageReferences = (
 				4E1860F12A23E0C600C8D215 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				4E68C3542A35176B00704A3F /* XCRemoteSwiftPackageReference "unsplash-photopicker-ios" */,
 			);
 			productRefGroup = 4E4A044E2A234CF700F6CD93 /* Products */;
 			projectDirPath = "";
@@ -499,8 +539,12 @@
 				4E1860F52A24BFE900C8D215 /* Extensions.swift in Sources */,
 				4E4A04532A234CF700F6CD93 /* SceneDelegate.swift in Sources */,
 				4E1860EE2A23C03200C8D215 /* AmbienceManager.swift in Sources */,
+				4EFF69C92A3A05DB0027ED54 /* DataRequest.swift in Sources */,
+				4EFF69CD2A3A06440027ED54 /* ErrorResponse.swift in Sources */,
+				4EFF69C62A39B6ED0027ED54 /* UnImage.swift in Sources */,
 				4E1860F02A23C3BA00C8D215 /* Constants.swift in Sources */,
 				4E1860E62A23B6CA00C8D215 /* UIHelper.swift in Sources */,
+				4EFF69CB2A3A06230027ED54 /* NetworkService.swift in Sources */,
 				4E8776F02A26FA6E004E3AF9 /* AmbiPresenter.swift in Sources */,
 				4E1860EB2A23BCDE00C8D215 /* Ambience.swift in Sources */,
 				4E8776EE2A26FA5F004E3AF9 /* AmbiVC.swift in Sources */,
@@ -853,6 +897,14 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		4E68C3542A35176B00704A3F /* XCRemoteSwiftPackageReference "unsplash-photopicker-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/unsplash/unsplash-photopicker-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -860,6 +912,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 4E1860F12A23E0C600C8D215 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
+		};
+		4E68C3552A35176B00704A3F /* UnsplashPhotoPicker */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4E68C3542A35176B00704A3F /* XCRemoteSwiftPackageReference "unsplash-photopicker-ios" */;
+			productName = UnsplashPhotoPicker;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
