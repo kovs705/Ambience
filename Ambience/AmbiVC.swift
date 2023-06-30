@@ -26,6 +26,8 @@ class AmbiVC: UIViewController {
     var player: AVAudioPlayer?
     var isPlaying: Bool = false
     
+    var images: [UnImage] = []
+    
     // MARK: - viewDidLoad
     override func viewDidLoad() {
         
@@ -202,5 +204,50 @@ extension AmbiVC: AmbiViewProtocol {
         }
         setAmbience(ambience: presenter?.ambience)
     }
+    
+    func changePhoto() {
+        guard (!images.isEmpty) else {
+            print("Empty!!")
+            return
+        }
+        
+        guard let randomImage = images.randomElement()?.urls.regular else {
+            return
+        }
+        ImageClient.shared.setImage(from: randomImage, placeholderImage: UIImage(named: self.presenter.ambience!.image)) { [weak self] image in
+            guard let self = self else {
+                return
+            }
+            guard let image else {
+                putImage(image: image!)
+                return
+            }
+            
+            putImage(image: image)
+            
+        }
+        
+        func putImage(image: UIImage) {
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                self.imageView.image = nil
+                self.ambienceImage.image = nil
+                
+                self.imageView.layer.add(UIHelper.giveOpacityAnimation(duration: 0.4, from: 1, toValue: 0), forKey: "opacityAnimation")
+                self.ambienceImage.layer.add(UIHelper.giveOpacityAnimation(duration: 0.4, from: 1, toValue: 0), forKey: "opacityAnimation")
+                
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
+                    self.imageView.image = image
+                    self.ambienceImage.image = image
+                    
+                    self.imageView.layer.add(UIHelper.giveOpacityAnimation(duration: 1, from: 0, toValue: 1), forKey: "opacityAnimation")
+                    self.ambienceImage.layer.add(UIHelper.giveOpacityAnimation(duration: 1, from: 0, toValue: 1), forKey: "opacityAnimation")
+                }
+            }
+        }
+    }
+    
+    
     
 }

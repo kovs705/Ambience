@@ -25,9 +25,10 @@ final class Builder: BuilderProtocol {
     
     func getDetailModule(ambience: Ambience) -> UIViewController {
         let view = AmbiVC()
+        let networkService = DefaultNetworkService()
         let ambienceManager = AmbienceManager()
         let presenterPlayer = view.player
-        let presenter = AmbiPresenter(view: view, ambience: ambience, ambiences: ambienceManager, player: view.player)
+        let presenter = AmbiPresenter(view: view, ambience: ambience, ambiences: ambienceManager, player: view.player, networkService: networkService)
         view.presenter = presenter
         return view
     }

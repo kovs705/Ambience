@@ -27,6 +27,9 @@
 		4E68C3562A35176B00704A3F /* UnsplashPhotoPicker in Frameworks */ = {isa = PBXBuildFile; productRef = 4E68C3552A35176B00704A3F /* UnsplashPhotoPicker */; };
 		4E8776EE2A26FA5F004E3AF9 /* AmbiVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8776ED2A26FA5F004E3AF9 /* AmbiVC.swift */; };
 		4E8776F02A26FA6E004E3AF9 /* AmbiPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8776EF2A26FA6E004E3AF9 /* AmbiPresenter.swift */; };
+		4EB87DB12A4F680A0064C2EE /* SearchPhotosRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB87DB02A4F680A0064C2EE /* SearchPhotosRequest.swift */; };
+		4EB87DB32A4F6FA40064C2EE /* ImageClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB87DB22A4F6FA40064C2EE /* ImageClient.swift */; };
+		4EB87DB52A4F6FCA0064C2EE /* ImageRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB87DB42A4F6FCA0064C2EE /* ImageRequest.swift */; };
 		4ECFE9E12A322FFB0025C446 /* BlueForestAmbi.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4ECFE9E02A322FFB0025C446 /* BlueForestAmbi.mp3 */; };
 		4ECFE9E32A3230120025C446 /* CalmUnderwaterAmbi.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4ECFE9E22A3230120025C446 /* CalmUnderwaterAmbi.mp3 */; };
 		4ECFE9E52A3230310025C446 /* MagicAmbi.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4ECFE9E42A3230310025C446 /* MagicAmbi.mp3 */; };
@@ -81,6 +84,9 @@
 		4E4A04732A234CF900F6CD93 /* AmbienceUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmbienceUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		4E8776ED2A26FA5F004E3AF9 /* AmbiVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmbiVC.swift; sourceTree = "<group>"; };
 		4E8776EF2A26FA6E004E3AF9 /* AmbiPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmbiPresenter.swift; sourceTree = "<group>"; };
+		4EB87DB02A4F680A0064C2EE /* SearchPhotosRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPhotosRequest.swift; sourceTree = "<group>"; };
+		4EB87DB22A4F6FA40064C2EE /* ImageClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageClient.swift; sourceTree = "<group>"; };
+		4EB87DB42A4F6FCA0064C2EE /* ImageRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageRequest.swift; sourceTree = "<group>"; };
 		4ECFE9E02A322FFB0025C446 /* BlueForestAmbi.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = BlueForestAmbi.mp3; sourceTree = "<group>"; };
 		4ECFE9E22A3230120025C446 /* CalmUnderwaterAmbi.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = CalmUnderwaterAmbi.mp3; sourceTree = "<group>"; };
 		4ECFE9E42A3230310025C446 /* MagicAmbi.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = MagicAmbi.mp3; sourceTree = "<group>"; };
@@ -243,6 +249,7 @@
 				4E1860D82A23B08000C8D215 /* Presentation layer */,
 				4E1860D32A23AF9F00C8D215 /* Business logic layer */,
 				4EFF69C72A3A05C80027ED54 /* Network layer */,
+				4EB87DB62A4F70190064C2EE /* Transportation layer */,
 				4E20278D2A23969900FD6C4D /* Support */,
 			);
 			path = Ambience;
@@ -272,6 +279,15 @@
 				4E8776EF2A26FA6E004E3AF9 /* AmbiPresenter.swift */,
 			);
 			name = AmbiVC;
+			sourceTree = "<group>";
+		};
+		4EB87DB62A4F70190064C2EE /* Transportation layer */ = {
+			isa = PBXGroup;
+			children = (
+				4EB87DB02A4F680A0064C2EE /* SearchPhotosRequest.swift */,
+				4EB87DB42A4F6FCA0064C2EE /* ImageRequest.swift */,
+			);
+			name = "Transportation layer";
 			sourceTree = "<group>";
 		};
 		4ECFE9D62A322F950025C446 /* Sounds */ = {
@@ -383,6 +399,7 @@
 				4EFF69C82A3A05DB0027ED54 /* DataRequest.swift */,
 				4EFF69CA2A3A06230027ED54 /* NetworkService.swift */,
 				4EFF69CC2A3A06440027ED54 /* ErrorResponse.swift */,
+				4EB87DB22A4F6FA40064C2EE /* ImageClient.swift */,
 			);
 			name = "Network layer";
 			sourceTree = "<group>";
@@ -536,10 +553,13 @@
 				4E4A04512A234CF700F6CD93 /* AppDelegate.swift in Sources */,
 				4E1860DE2A23B13600C8D215 /* MainVC.swift in Sources */,
 				4E1860E02A23B14300C8D215 /* MainVCPresenter.swift in Sources */,
+				4EB87DB32A4F6FA40064C2EE /* ImageClient.swift in Sources */,
 				4E1860F52A24BFE900C8D215 /* Extensions.swift in Sources */,
+				4EB87DB12A4F680A0064C2EE /* SearchPhotosRequest.swift in Sources */,
 				4E4A04532A234CF700F6CD93 /* SceneDelegate.swift in Sources */,
 				4E1860EE2A23C03200C8D215 /* AmbienceManager.swift in Sources */,
 				4EFF69C92A3A05DB0027ED54 /* DataRequest.swift in Sources */,
+				4EB87DB52A4F6FCA0064C2EE /* ImageRequest.swift in Sources */,
 				4EFF69CD2A3A06440027ED54 /* ErrorResponse.swift in Sources */,
 				4EFF69C62A39B6ED0027ED54 /* UnImage.swift in Sources */,
 				4E1860F02A23C3BA00C8D215 /* Constants.swift in Sources */,

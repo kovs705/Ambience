@@ -14,14 +14,17 @@ protocol AmbiViewProtocol: AnyObject {
     var isPlaying: Bool { get set }
     var player: AVAudioPlayer? { get set }
     
+    var images: [UnImage] { get set }
+    
     func givePlayPauseImage()
     func optimizeClose()
     
     func shuffleIt()
+    func changePhoto()
 }
 
 protocol AmbiPresenterProtocol: AnyObject {
-    init(view: AmbiViewProtocol, ambience: Ambience?, ambiences: AmbienceManagerProtocol?, player: AVAudioPlayer?)
+    init(view: AmbiViewProtocol, ambience: Ambience?, ambiences: AmbienceManagerProtocol?, player: AVAudioPlayer?, networkService: NetworkService)
     var ambience: Ambience? { get }
     var ambiences: AmbienceManagerProtocol? { get }
     
@@ -42,13 +45,16 @@ final class AmbiPresenter: AmbiPresenterProtocol {
     var ambience: Ambience?
     var ambiences: AmbienceManagerProtocol?
     
+    var networkService: NetworkService!
+    
     var player: AVAudioPlayer?
     
-    required init(view: AmbiViewProtocol, ambience: Ambience?, ambiences: AmbienceManagerProtocol?, player: AVAudioPlayer?) {
+    required init(view: AmbiViewProtocol, ambience: Ambience?, ambiences: AmbienceManagerProtocol?, player: AVAudioPlayer?, networkService: NetworkService) {
         self.view = view
         self.ambience = ambience
         self.ambiences = ambiences
         self.player = player
+        self.networkService = networkService
     }
     
     func setAmbience(ambience: Ambience?) {
@@ -112,6 +118,28 @@ final class AmbiPresenter: AmbiPresenterProtocol {
     func showMore(vc: UIViewController) {
         // more sounds at MixKit
         // func on the bottom
+    }
+    
+    func getPhotofromUnsplash() {
+        let request = SearchPhotosRequest(page: "1", query: "Mountains")
+        networkService.request(request) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let images):
+                guard let images = images else {
+                    return
+                }
+                
+                if self.view?.images == nil {
+                    self.view?.images.append(contentsOf: images)
+                    
+                } else {
+                    
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
     
 }
