@@ -14,7 +14,7 @@ protocol AmbiViewProtocol: AnyObject {
     var isPlaying: Bool { get set }
     var player: AVAudioPlayer? { get set }
     
-    var images: [UnImage] { get set }
+    var images: [ImageResult] { get set }
     
     func givePlayPauseImage()
     func optimizeClose()
@@ -37,6 +37,8 @@ protocol AmbiPresenterProtocol: AnyObject {
     func play()
     func stop()
     func shuffle()
+    
+    func getPhotosfromUnsplash()
 }
 
 final class AmbiPresenter: AmbiPresenterProtocol {
@@ -108,10 +110,20 @@ final class AmbiPresenter: AmbiPresenterProtocol {
     }
     
     func shuffle() {
-        guard let shuffledAmbience = ambiences?.all.randomElement() else { return }
-        ambience = shuffledAmbience
+        var random: Ambience! = giveRandomAmbi()
+        
+        while random == ambience {
+            random = giveRandomAmbi()
+        }
+        
+        ambience = random
         view?.shuffleIt()
         print("Shuffled")
+    }
+    
+    func giveRandomAmbi() -> Ambience {
+        guard let shuffledAmbience = ambiences?.all.randomElement() else { return ambience! }
+        return shuffledAmbience
     }
     
     
@@ -120,26 +132,29 @@ final class AmbiPresenter: AmbiPresenterProtocol {
         // func on the bottom
     }
     
-    func getPhotofromUnsplash() {
-        let request = SearchPhotosRequest(page: "1", query: "Mountains")
-        networkService.request(request) { [weak self] result in
+    func getPhotosfromUnsplash() {
+        APICaller.shared.getPhotosFromUnsplash(with: ambience?.name ?? "Blue sky") { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let images):
-                guard let images = images else {
-                    return
-                }
                 
                 if self.view?.images == nil {
-                    self.view?.images.append(contentsOf: images)
-                    
+                    addContents(of: images)
                 } else {
-                    
+                    print("There are some photos")
+                    self.view?.images.removeAll()
+                    addContents(of: images)
                 }
+                
             case .failure(let error):
                 print(error)
             }
+            
+            func addContents(of images: [ImageResult]) {
+                self.view?.images.append(contentsOf: images)
+            }
         }
+        
     }
     
 }

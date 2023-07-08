@@ -7,6 +7,14 @@
 
 import UIKit
 
+// MARK: - WEB
+enum Web {
+    static let accessKey = "ThgR5z9J9aWH2GK2dWuMf9A9Ei3JZT8ygBCGwQmcGXI"
+    static let baseURL = "https://api.unsplash.com"
+    static let searchURL = "/search/photos?query="
+}
+
+// MARK: - Colors
 enum Colors {
     enum BlueForest {
         static let one = "BlueForest1"
@@ -54,6 +62,7 @@ enum Colors {
     }
 }
 
+// MARK: - Sounds
 enum Sounds {
     static let warmCampfire = "WarmCampfireAmbi"
     static let urbanCity = "UrbanCityAmbi"
@@ -67,6 +76,7 @@ enum Sounds {
     
 }
 
+// MARK: - Images
 enum Images {
     static let blueForest = "BlueForest"
     static let highestMountains = "HighestMountains"

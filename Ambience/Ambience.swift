@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct Ambience {
+struct Ambience: Equatable {
     let name: String
     let firstColor: UIColor
     let secondColor: UIColor

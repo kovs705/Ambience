@@ -26,7 +26,7 @@ class AmbiVC: UIViewController {
     var player: AVAudioPlayer?
     var isPlaying: Bool = false
     
-    var images: [UnImage] = []
+    var images: [ImageResult] = []
     
     // MARK: - viewDidLoad
     override func viewDidLoad() {
@@ -43,6 +43,8 @@ class AmbiVC: UIViewController {
         configureButtons()
         
         setAmbience(ambience: presenter.ambience)
+        
+        presenter.getPhotosfromUnsplash()
     }
     
     
@@ -214,10 +216,7 @@ extension AmbiVC: AmbiViewProtocol {
         guard let randomImage = images.randomElement()?.urls.regular else {
             return
         }
-        ImageClient.shared.setImage(from: randomImage, placeholderImage: UIImage(named: self.presenter.ambience!.image)) { [weak self] image in
-            guard let self = self else {
-                return
-            }
+        ImageClient.shared.setImage(from: randomImage, placeholderImage: UIImage(named: self.presenter.ambience!.image)) { image in
             guard let image else {
                 putImage(image: image!)
                 return
