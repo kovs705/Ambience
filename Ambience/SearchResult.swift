@@ -14,7 +14,7 @@ struct Results: Codable {
 
 struct ImageResult: Codable {
     var id: String
-    var description: String
+    var description: String?
     var urls: [URLs]
 }
 

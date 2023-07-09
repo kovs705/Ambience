@@ -118,6 +118,7 @@ final class AmbiPresenter: AmbiPresenterProtocol {
         
         ambience = random
         view?.shuffleIt()
+        view?.images.removeAll()
         print("Shuffled")
     }
     
@@ -133,6 +134,7 @@ final class AmbiPresenter: AmbiPresenterProtocol {
     }
     
     func getPhotosfromUnsplash() {
+        print(ambience!.name)
         APICaller.shared.getPhotosFromUnsplash(with: ambience?.name ?? "Blue sky") { [weak self] result in
             guard let self = self else { return }
             switch result {
@@ -140,6 +142,7 @@ final class AmbiPresenter: AmbiPresenterProtocol {
                 
                 if self.view?.images == nil {
                     addContents(of: images)
+                    print("Cool!")
                 } else {
                     print("There are some photos")
                     self.view?.images.removeAll()

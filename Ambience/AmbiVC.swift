@@ -15,6 +15,7 @@ class AmbiVC: UIViewController {
     
     private var imageView = UIImageView()
     private var closeB = UIButton()
+    private var unsplashB = UIButton()
     
     private var ambienceImage = UIImageView()
     private var soundB = UIButton()
@@ -44,19 +45,20 @@ class AmbiVC: UIViewController {
         
         setAmbience(ambience: presenter.ambience)
         
-        presenter.getPhotosfromUnsplash()
     }
     
     
     // MARK: - Other funcs
     func configureUI() {
-        view.addSubviews(imageView, ambienceImage, closeB, soundB, shuffleB)
+        view.addSubviews(imageView, ambienceImage, closeB, unsplashB, soundB, shuffleB)
         placeImageView()
         placeAmbienceImage()
     }
     
     func configureButtons() {
         placeCloseB()
+        placeUnsplashB()
+        
         placeSoundB()
         placeShuffleB()
         
@@ -116,6 +118,19 @@ class AmbiVC: UIViewController {
         closeB.tintColor = .systemGray6
     }
     
+    func placeUnsplashB() {
+
+        unsplashB.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(15)
+            make.trailing.equalTo(view).inset(25)
+        }
+        
+        unsplashB.setImage(UIImage(systemName: "xmark.circle.fill", withConfiguration: UIHelper.giveConfigForImage(size: 25, weight: .semibold)), for: .normal)
+        unsplashB.addTarget(self, action: #selector(unsplashIt), for: .touchUpInside)
+        unsplashB.tintColor = .systemGray6
+
+    }
+    
     func placeSoundB() {
         soundB.addTarget(self, action: #selector(playPause), for: .touchUpInside)
         soundB.tintColor = .systemGray5
@@ -157,6 +172,11 @@ class AmbiVC: UIViewController {
     
     @objc func shuffle() {
         presenter.shuffle()
+    }
+    
+    @objc func unsplashIt() {
+        presenter.getPhotosfromUnsplash()
+        changePhoto()
     }
     
 }
@@ -213,7 +233,7 @@ extension AmbiVC: AmbiViewProtocol {
             return
         }
         
-        guard let randomImage = images.randomElement()?.urls.regular else {
+        guard let randomImage = images.randomElement()?.urls.randomElement()?.small else {
             return
         }
         ImageClient.shared.setImage(from: randomImage, placeholderImage: UIImage(named: self.presenter.ambience!.image)) { image in
