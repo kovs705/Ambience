@@ -28,7 +28,8 @@ final class Builder: BuilderProtocol {
         let networkService = DefaultNetworkService()
         let ambienceManager = AmbienceManager()
         let presenterPlayer = view.player
-        let presenter = AmbiPresenter(view: view, ambience: ambience, ambiences: ambienceManager, player: view.player, networkService: networkService)
+        let caller = APICaller()
+        let presenter = AmbiPresenter(view: view, ambience: ambience, ambiences: ambienceManager, player: presenterPlayer, networkService: networkService, caller: caller)
         view.presenter = presenter
         return view
     }

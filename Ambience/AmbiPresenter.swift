@@ -24,7 +24,7 @@ protocol AmbiViewProtocol: AnyObject {
 }
 
 protocol AmbiPresenterProtocol: AnyObject {
-    init(view: AmbiViewProtocol, ambience: Ambience?, ambiences: AmbienceManagerProtocol?, player: AVAudioPlayer?, networkService: NetworkService)
+    init(view: AmbiViewProtocol, ambience: Ambience?, ambiences: AmbienceManagerProtocol?, player: AVAudioPlayer?, networkService: NetworkService, caller: APICaller?)
     var ambience: Ambience? { get }
     var ambiences: AmbienceManagerProtocol? { get }
     
@@ -32,6 +32,8 @@ protocol AmbiPresenterProtocol: AnyObject {
     func showMore(vc: UIViewController)
     
     var player: AVAudioPlayer? { get set }
+    var APICaller: APICaller? { get set }
+    
     func playPause()
     
     func play()
@@ -50,13 +52,15 @@ final class AmbiPresenter: AmbiPresenterProtocol {
     var networkService: NetworkService!
     
     var player: AVAudioPlayer?
+    var APICaller: APICaller?
     
-    required init(view: AmbiViewProtocol, ambience: Ambience?, ambiences: AmbienceManagerProtocol?, player: AVAudioPlayer?, networkService: NetworkService) {
+    required init(view: AmbiViewProtocol, ambience: Ambience?, ambiences: AmbienceManagerProtocol?, player: AVAudioPlayer?, networkService: NetworkService, caller: APICaller?) {
         self.view = view
         self.ambience = ambience
         self.ambiences = ambiences
         self.player = player
         self.networkService = networkService
+        self.APICaller = caller
     }
     
     func setAmbience(ambience: Ambience?) {
@@ -134,30 +138,44 @@ final class AmbiPresenter: AmbiPresenterProtocol {
     }
     
     func getPhotosfromUnsplash() {
-        print(ambience!.name)
-        APICaller.shared.getPhotosFromUnsplash(with: ambience?.name ?? "Blue sky") { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case .success(let images):
-                
-                if self.view?.images == nil {
-                    addContents(of: images)
-                    print("Cool!")
-                } else {
-                    print("There are some photos")
-                    self.view?.images.removeAll()
-                    addContents(of: images)
+        guard let view = self.view else { return }
+        guard let ambience = ambience else { return }
+        if view.images.isEmpty {
+            let ambienceWord: String = ambience.name
+            print(ambienceWord)
+            guard let APICaller = APICaller else { return }
+            APICaller.createRequestAndFetchPhotos(with: ambienceWord, completion: { [weak self] result in
+                guard let self = self else { return }
+                switch result {
+                case .success(let images):
+                    print(images)
+                    if ((self.view?.images.isEmpty) != nil) {
+                        addContents(of: images)
+                        print("Cool!")
+                        self.view?.changePhoto()
+                        return
+                    } else {
+                        print("There are some photos")
+                        self.view?.images.removeAll()
+                        addContents(of: images)
+                        self.view?.changePhoto()
+                        return
+                    }
+                    
+                    
+                case .failure(let error):
+                    print(error)
                 }
                 
-            case .failure(let error):
-                print(error)
-            }
-            
-            func addContents(of images: [ImageResult]) {
-                self.view?.images.append(contentsOf: images)
-            }
+                func addContents(of images: [ImageResult]) {
+                    self.view?.images.append(contentsOf: images)
+                }
+            })
+        } else {
+            self.view?.changePhoto()
         }
         
     }
+                                                    
     
 }

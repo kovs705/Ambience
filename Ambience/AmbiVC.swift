@@ -45,6 +45,7 @@ class AmbiVC: UIViewController {
         
         setAmbience(ambience: presenter.ambience)
         
+        images.removeAll()
     }
     
     
@@ -176,7 +177,6 @@ class AmbiVC: UIViewController {
     
     @objc func unsplashIt() {
         presenter.getPhotosfromUnsplash()
-        changePhoto()
     }
     
 }
@@ -228,12 +228,8 @@ extension AmbiVC: AmbiViewProtocol {
     }
     
     func changePhoto() {
-        guard (!images.isEmpty) else {
-            print("Empty!!")
-            return
-        }
         
-        guard let randomImage = images.randomElement()?.urls.randomElement()?.small else {
+        guard let randomImage = images.randomElement()?.urls.small else {
             return
         }
         ImageClient.shared.setImage(from: randomImage, placeholderImage: UIImage(named: self.presenter.ambience!.image)) { image in
@@ -249,6 +245,7 @@ extension AmbiVC: AmbiViewProtocol {
         func putImage(image: UIImage) {
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }
+                
                 self.imageView.image = nil
                 self.ambienceImage.image = nil
                 
