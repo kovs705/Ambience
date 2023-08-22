@@ -9,7 +9,8 @@ import UIKit
 import AVFoundation
 
 protocol AmbiViewProtocol: AnyObject {
-    func setAmbience(ambience: Ambience?)
+    func setNewAmbience(ambience: Ambience?) async
+    func loadImage(named name: String) async throws -> UIImage
     
     var isPlaying: Bool { get set }
     var player: AVAudioPlayer? { get set }
@@ -28,7 +29,6 @@ protocol AmbiPresenterProtocol: AnyObject {
     var ambience: Ambience? { get }
     var ambiences: AmbienceManagerProtocol? { get }
     
-    func setAmbience(ambience: Ambience?)
     func showMore(vc: UIViewController)
     
     var player: AVAudioPlayer? { get set }
@@ -61,10 +61,6 @@ final class AmbiPresenter: AmbiPresenterProtocol {
         self.player = player
         self.networkService = networkService
         self.APICaller = caller
-    }
-    
-    func setAmbience(ambience: Ambience?) {
-        self.view?.setAmbience(ambience: ambience)
     }
     
     
@@ -140,9 +136,11 @@ final class AmbiPresenter: AmbiPresenterProtocol {
     func getPhotosfromUnsplash() {
         guard let view = self.view else { return }
         guard let ambience = ambience else { return }
+        
         if view.images.isEmpty {
             let ambienceWord: String = ambience.name
             print(ambienceWord)
+            
             guard let APICaller = APICaller else { return }
             APICaller.createRequestAndFetchPhotos(with: ambienceWord, completion: { [weak self] result in
                 guard let self = self else { return }

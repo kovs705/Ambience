@@ -8,27 +8,23 @@
 import Foundation
 
 protocol NetworkService {
-    func request<Request: DataRequest>(_ request: Request, completion: @escaping (Result<Request.Response, Error>) -> Void)
+    func request<Request: DataRequest>(_ request: Request) async throws -> Request.Response
 }
 
 final class DefaultNetworkService: NetworkService {
-    
-    func request<Request: DataRequest>(_ request: Request, completion: @escaping (Result<Request.Response, Error>) -> Void) {
-        
+    func request<Request: DataRequest>(_ request: Request) async throws -> Request.Response {
         guard var urlComponent = URLComponents(string: request.url) else {
-            let error = NSError(
+            throw NSError(
                 domain: ErrorResponse.invalidEndpoint.rawValue,
                 code: 404,
                 userInfo: nil
             )
-            
-            return completion(.failure(error))
         }
         
         var queryItems: [URLQueryItem] = []
         
-        request.queryItems.forEach {
-            let urlQueryItem = URLQueryItem(name: $0.key, value: $0.value)
+        request.queryItems.forEach { key, value in
+            let urlQueryItem = URLQueryItem(name: key, value: value)
             urlComponent.queryItems?.append(urlQueryItem)
             queryItems.append(urlQueryItem)
         }
@@ -36,40 +32,26 @@ final class DefaultNetworkService: NetworkService {
         urlComponent.queryItems = queryItems
         
         guard let url = urlComponent.url else {
-            let error = NSError(
+            throw NSError(
                 domain: ErrorResponse.invalidEndpoint.rawValue,
                 code: 404,
                 userInfo: nil
             )
-            
-            return completion(.failure(error))
         }
         
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = request.method.rawValue
         urlRequest.allHTTPHeaderFields = request.headers
         
-        URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
-            if let error = error {
-                return completion(.failure(error))
-            }
-            
-            guard let response = response as? HTTPURLResponse, 200..<300 ~= response.statusCode else {
-                print("response is \(response)")
-                return completion(.failure(NSError()))
-            }
-            
-            guard let data = data else {
-                return completion(.failure(NSError()))
-            }
-            
-            do {
-                try completion(.success(request.decode(data)))
-            } catch let error as NSError {
-                completion(.failure(error))
-            }
+        let (data, response) = try await URLSession.shared.data(for: urlRequest)
+        
+        guard let httpResponse = response as? HTTPURLResponse,
+              200..<300 ~= httpResponse.statusCode else {
+            print("response is \(response)")
+            throw NSError()
         }
-        .resume()
+        
+        return try request.decode(data)
     }
 }
 

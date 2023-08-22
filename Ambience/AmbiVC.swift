@@ -13,19 +13,20 @@ class AmbiVC: UIViewController {
     
     var presenter: AmbiPresenterProtocol!
     
-    private var imageView = UIImageView()
-    private var closeB = UIButton()
-    private var unsplashB = UIButton()
+    private var imageView     = UIImageView()
+    private var closeB        = UIButton()
+    private var unsplashB     = UIButton()
     
     private var ambienceImage = UIImageView()
-    private var soundB = UIButton()
-    private var shuffleB = UIButton()
-    private var nameLabel = UILabel()
+    private var soundB        = UIButton()
+    private var shuffleB      = UIButton()
+    private var nameLabel     = UILabel()
     
-    private var showMore = UIButton() // more sounds on MixKit
+    private var showMore      = UIButton() // more sounds on MixKit
     
     var player: AVAudioPlayer?
-    var isPlaying: Bool = false
+    var isPlaying = false
+    var isLoading = false
     
     var images: [ImageResult] = []
     
@@ -43,13 +44,17 @@ class AmbiVC: UIViewController {
         configureUI()
         configureButtons()
         
-        setAmbience(ambience: presenter.ambience)
+        Task { await setNewAmbience(ambience: presenter.ambience) }
         
         images.removeAll()
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        performClearing()
+        presenter = nil
+    }
     
-    // MARK: - Other funcs
+    // MARK: - UI funcs
     func configureUI() {
         view.addSubviews(imageView, ambienceImage, closeB, unsplashB, soundB, shuffleB)
         placeImageView()
@@ -108,7 +113,7 @@ class AmbiVC: UIViewController {
     }
     
     func placeCloseB() {
-
+        
         closeB.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(15)
             make.leading.equalTo(view).inset(25)
@@ -120,16 +125,16 @@ class AmbiVC: UIViewController {
     }
     
     func placeUnsplashB() {
-
+        
         unsplashB.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(15)
             make.trailing.equalTo(view).inset(25)
         }
         
-        unsplashB.setImage(UIImage(systemName: "xmark.circle.fill", withConfiguration: UIHelper.giveConfigForImage(size: 25, weight: .semibold)), for: .normal)
+        unsplashB.setImage(UIImage(systemName: "photo.stack.fill", withConfiguration: UIHelper.giveConfigForImage(size: 25, weight: .semibold)), for: .normal)
         unsplashB.addTarget(self, action: #selector(unsplashIt), for: .touchUpInside)
         unsplashB.tintColor = .systemGray6
-
+        
     }
     
     func placeSoundB() {
@@ -153,6 +158,12 @@ class AmbiVC: UIViewController {
         }
     }
     
+    // MARK: - Other funcs
+    func performClearing() {
+        images.removeAll()
+        ImageClient.shared.clearCache()
+    }
+    
     
     // MARK: - Obj-c funcs
     @objc func handleSwipeGesture(_ sender: UISwipeGestureRecognizer) {
@@ -173,6 +184,7 @@ class AmbiVC: UIViewController {
     
     @objc func shuffle() {
         presenter.shuffle()
+        performClearing()
     }
     
     @objc func unsplashIt() {
@@ -185,18 +197,37 @@ class AmbiVC: UIViewController {
 // MARK: - Protocol
 extension AmbiVC: AmbiViewProtocol {
     
-    func setAmbience(ambience: Ambience?) {
+    func setNewAmbience(ambience: Ambience?) async {
         guard let image = ambience?.image else { return }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) { [weak self] in
-            guard let self = self else { return }
-            self.imageView.image = UIImage(named: image)
-            self.ambienceImage.image = UIImage(named: image)
-            
-            self.imageView.layer.add(UIHelper.giveOpacityAnimation(duration: 1, from: 0, toValue: 1), forKey: "opacityAnimation")
-            self.ambienceImage.layer.add(UIHelper.giveOpacityAnimation(duration: 1, from: 0, toValue: 1), forKey: "opacityAnimation")
+        
+        do {
+            let loadedImage = try await loadImage(named: image)
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                self.imageView.image = loadedImage
+                self.ambienceImage.image = loadedImage
+                self.imageView.layer.add(UIHelper.giveOpacityAnimation(duration: 1, from: 0, toValue: 1), forKey: "opacityAnimation")
+                self.ambienceImage.layer.add(UIHelper.giveOpacityAnimation(duration: 1, from: 0, toValue: 1), forKey: "opacityAnimation")
+            }
+        } catch {
+            print("Error loading image:", error)
         }
     }
     
+    func loadImage(named name: String) async throws -> UIImage {
+        return try await withUnsafeThrowingContinuation { continuation in
+            DispatchQueue.global().async {
+                if let image = UIImage(named: name) {
+                    continuation.resume(returning: image)
+                } else {
+                    continuation.resume(throwing: "Failed to load" as! Error)
+                }
+            }
+        }
+    }
+    
+    
+    // MARK: - PlayPauseImage
     func givePlayPauseImage() {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
@@ -208,6 +239,8 @@ extension AmbiVC: AmbiViewProtocol {
         }
     }
     
+    
+    // MARK: - Close func
     func optimizeClose() {
         DispatchQueue.main.asyncAfter(deadline: .now()) { [weak self] in
             guard let self = self else { return }
@@ -224,46 +257,54 @@ extension AmbiVC: AmbiViewProtocol {
             playPause()
             givePlayPauseImage()
         }
-        setAmbience(ambience: presenter?.ambience)
+        Task {
+            await setNewAmbience(ambience: presenter?.ambience)
+        }
     }
     
+    
+    // MARK: - Change photo
     func changePhoto() {
+        guard let randomImage = images.randomElement()?.urls.small,
+              let ambience = self.presenter.ambience else { return }
         
-        guard let randomImage = images.randomElement()?.urls.small else {
-            return
-        }
-        ImageClient.shared.setImage(from: randomImage, placeholderImage: UIImage(named: self.presenter.ambience!.image)) { image in
-            guard let image else {
-                putImage(image: image!)
-                return
-            }
-            
-            putImage(image: image)
-            
-        }
-        
-        func putImage(image: UIImage) {
-            DispatchQueue.main.async { [weak self] in
-                guard let self = self else { return }
-                
-                self.imageView.image = nil
-                self.ambienceImage.image = nil
-                
-                self.imageView.layer.add(UIHelper.giveOpacityAnimation(duration: 0.4, from: 1, toValue: 0), forKey: "opacityAnimation")
-                self.ambienceImage.layer.add(UIHelper.giveOpacityAnimation(duration: 0.4, from: 1, toValue: 0), forKey: "opacityAnimation")
-                
-                
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
-                    self.imageView.image = image
-                    self.ambienceImage.image = image
-                    
-                    self.imageView.layer.add(UIHelper.giveOpacityAnimation(duration: 1, from: 0, toValue: 1), forKey: "opacityAnimation")
-                    self.ambienceImage.layer.add(UIHelper.giveOpacityAnimation(duration: 1, from: 0, toValue: 1), forKey: "opacityAnimation")
+        Task {
+            do {
+                if let image = try await ImageClient.shared.setImage(from: randomImage, placeholderImage: UIImage(named: ambience.image)) {
+                    await putNewImage(image: image)
+                } else {
+                    await putNewImage(image: UIImage(named: ambience.image)!)
                 }
+            } catch {
+                print("Error in setting image and changing photo")
             }
         }
     }
     
-    
+    func putNewImage(image: UIImage) async {
+        DispatchQueue.main.async { [weak self] in
+            guard let self  = self else { return }
+            
+            self.imageView.layer.add(UIHelper.giveOpacityAnimation(duration: 0.5, from: 1, toValue: 0), forKey: "opacityAnimation")
+            self.ambienceImage.layer.add(UIHelper.giveOpacityAnimation(duration: 0.5, from: 1, toValue: 0), forKey: "opacityAnimation")
+            
+            self.imageView.image     = nil
+            self.ambienceImage.image = nil
+            
+        }
+        
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.imageView.image = image
+            self.ambienceImage.image = image
+            
+            self.imageView.layer.add(UIHelper.giveOpacityAnimation(duration: 0.5, from: 0, toValue: 1), forKey: "opacityAnimation")
+            self.ambienceImage.layer.add(UIHelper.giveOpacityAnimation(duration: 0.5, from: 0, toValue: 1), forKey: "opacityAnimation")
+        }
+        
+    }
     
 }
+
+
+
