@@ -144,6 +144,7 @@ final class AmbiPresenter: AmbiPresenterProtocol {
             guard let APICaller = APICaller else { return }
             APICaller.createRequestAndFetchPhotos(with: ambienceWord, completion: { [weak self] result in
                 guard let self = self else { return }
+                
                 switch result {
                 case .success(let images):
                     print(images)

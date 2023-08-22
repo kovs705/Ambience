@@ -23,10 +23,11 @@ class AmbiVC: UIViewController {
     private var nameLabel     = UILabel()
     
     private var showMore      = UIButton() // more sounds on MixKit
+    private var loading       = UIActivityIndicatorView(style: .medium)
+    let transparentView       = UIView()
     
     var player: AVAudioPlayer?
     var isPlaying = false
-    var isLoading = false
     
     var images: [ImageResult] = []
     
@@ -41,6 +42,10 @@ class AmbiVC: UIViewController {
         imageView.backgroundColor = .black
         ambienceImage.backgroundColor = .black
         
+        loading.isHidden = false
+        loading.color = .white
+        loading.startAnimating()
+        
         configureUI()
         configureButtons()
         
@@ -52,6 +57,7 @@ class AmbiVC: UIViewController {
     override func viewDidDisappear(_ animated: Bool) {
         performClearing()
         presenter = nil
+        loading.stopAnimating()
     }
     
     // MARK: - UI funcs
@@ -73,7 +79,6 @@ class AmbiVC: UIViewController {
     
     func placeImageView() {
         
-        let transparentView = UIView()
         transparentView.backgroundColor = .clear
         
         let blurEffect = UIBlurEffect(style: .systemUltraThinMaterialDark)
@@ -110,6 +115,13 @@ class AmbiVC: UIViewController {
         ambienceImage.contentMode = .scaleAspectFill
         ambienceImage.clipsToBounds = true
         ambienceImage.layer.cornerRadius = 16
+        
+        ambienceImage.addSubviews(loading)
+        
+        loading.snp.makeConstraints { make in
+            make.centerX.equalTo(ambienceImage)
+            make.centerY.equalTo(ambienceImage)
+        }
     }
     
     func placeCloseB() {
@@ -121,7 +133,7 @@ class AmbiVC: UIViewController {
         
         closeB.setImage(UIImage(systemName: "xmark.circle.fill", withConfiguration: UIHelper.giveConfigForImage(size: 25, weight: .semibold)), for: .normal)
         closeB.addTarget(self, action: #selector(dismissView), for: .touchUpInside)
-        closeB.tintColor = .systemGray6
+        closeB.tintColor = UIColor(named: "gray6")
     }
     
     func placeUnsplashB() {
@@ -133,13 +145,13 @@ class AmbiVC: UIViewController {
         
         unsplashB.setImage(UIImage(systemName: "photo.stack.fill", withConfiguration: UIHelper.giveConfigForImage(size: 25, weight: .semibold)), for: .normal)
         unsplashB.addTarget(self, action: #selector(unsplashIt), for: .touchUpInside)
-        unsplashB.tintColor = .systemGray6
+        unsplashB.tintColor = UIColor(named: "gray6")
         
     }
     
     func placeSoundB() {
         soundB.addTarget(self, action: #selector(playPause), for: .touchUpInside)
-        soundB.tintColor = .systemGray5
+        soundB.tintColor = UIColor(named: "gray5")
         
         soundB.snp.makeConstraints { make in
             make.top.equalTo(ambienceImage.snp.bottom).offset(100)
@@ -150,7 +162,7 @@ class AmbiVC: UIViewController {
     func placeShuffleB() {
         shuffleB.setImage(UIImage(systemName: "shuffle", withConfiguration: UIHelper.giveConfigForImage(size: 30, weight: .semibold)), for: .normal)
         shuffleB.addTarget(self, action: #selector(shuffle), for: .touchUpInside)
-        shuffleB.tintColor = .systemGray5
+        shuffleB.tintColor = UIColor(named: "gray5")
         
         shuffleB.snp.makeConstraints { make in
             make.top.equalTo(ambienceImage.snp.bottom).offset(107)
@@ -188,6 +200,15 @@ class AmbiVC: UIViewController {
     }
     
     @objc func unsplashIt() {
+//        imageView.layer.add(UIHelper.giveOpacityAnimation(duration: 0.5, from: 1, toValue: 0), forKey: "opacityAnimation")
+//        ambienceImage.layer.add(UIHelper.giveOpacityAnimation(duration: 0.5, from: 1, toValue: 0), forKey: "opacityAnimation")
+        
+//        transparentView.isHidden = true
+        imageView.image = nil
+        ambienceImage.image = nil
+        
+        loading.isHidden = false
+        
         presenter.getPhotosfromUnsplash()
     }
     
@@ -204,8 +225,12 @@ extension AmbiVC: AmbiViewProtocol {
             let loadedImage = try await loadImage(named: image)
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }
+                
+                self.loading.isHidden = true
+                self.transparentView.isHidden = false
                 self.imageView.image = loadedImage
                 self.ambienceImage.image = loadedImage
+                
                 self.imageView.layer.add(UIHelper.giveOpacityAnimation(duration: 1, from: 0, toValue: 1), forKey: "opacityAnimation")
                 self.ambienceImage.layer.add(UIHelper.giveOpacityAnimation(duration: 1, from: 0, toValue: 1), forKey: "opacityAnimation")
             }
@@ -242,10 +267,9 @@ extension AmbiVC: AmbiViewProtocol {
     
     // MARK: - Close func
     func optimizeClose() {
-        DispatchQueue.main.asyncAfter(deadline: .now()) { [weak self] in
+        DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
-            self.imageView.image = nil
-            self.ambienceImage.image = nil
+            self.loading.isHidden = false
             
             self.imageView.layer.add(UIHelper.giveOpacityAnimation(duration: 0.4, from: 1, toValue: 0), forKey: "opacityAnimation")
             self.ambienceImage.layer.add(UIHelper.giveOpacityAnimation(duration: 0.4, from: 1, toValue: 0), forKey: "opacityAnimation")
@@ -285,9 +309,6 @@ extension AmbiVC: AmbiViewProtocol {
         DispatchQueue.main.async { [weak self] in
             guard let self  = self else { return }
             
-            self.imageView.layer.add(UIHelper.giveOpacityAnimation(duration: 0.5, from: 1, toValue: 0), forKey: "opacityAnimation")
-            self.ambienceImage.layer.add(UIHelper.giveOpacityAnimation(duration: 0.5, from: 1, toValue: 0), forKey: "opacityAnimation")
-            
             self.imageView.image     = nil
             self.ambienceImage.image = nil
             
@@ -300,6 +321,9 @@ extension AmbiVC: AmbiViewProtocol {
             
             self.imageView.layer.add(UIHelper.giveOpacityAnimation(duration: 0.5, from: 0, toValue: 1), forKey: "opacityAnimation")
             self.ambienceImage.layer.add(UIHelper.giveOpacityAnimation(duration: 0.5, from: 0, toValue: 1), forKey: "opacityAnimation")
+            
+            self.loading.isHidden = true
+            self.transparentView.isHidden = false
         }
         
     }

@@ -40,7 +40,7 @@ class MainVC: UIViewController {
         collectionView.delegate = self
         collectionView.register(AmbiCell.self, forCellWithReuseIdentifier: AmbiCell.id)
         
-        collectionView.backgroundColor = .systemBackground
+        collectionView.backgroundColor = UIColor(named: "background")
         collectionView.alwaysBounceVertical = true
         collectionView.isScrollEnabled = true
     }
