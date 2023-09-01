@@ -19,8 +19,9 @@ Pet-project app to listen to ambient sounds of nature (or melodies) with images 
      width="356" height="665">
 
 ### Ambience page (work in progress)
-This page will also include the button to change the image, depending on chosen Ambience
-<img src="https://user-images.githubusercontent.com/56929597/244808578-744897c5-2386-4a4b-87c2-62cf3bab9282.png" 
+At the moment this page has play/pause, shuffle button, close button (but you can close by swiping) and button to load images from Unsplash
+
+<img src="https://github.com/kovs705/Ambience/assets/56929597/9dfa46f6-14f7-4e30-8e05-9dc4fd9b6694" 
      width="356" height="665">
      
 ### Animation
