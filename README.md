@@ -5,7 +5,7 @@ Pet-project app to listen to ambient sounds of nature (or melodies) with images 
 
 ## Stack
 - MVP
-- [Unsplash API](https://unsplash.com/developers) (work in progress)
+- [Unsplash API](https://unsplash.com/developers)
 - SnapKit
 
 ## Requirements
