@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import SwiftUI
+import WhatsNewPack
 
 class MainVC: UIViewController {
     
@@ -14,7 +16,6 @@ class MainVC: UIViewController {
     private var collectionView: UICollectionView!
     private var descriptionLabel = UILabel()
     
-    
     // MARK: - viewDidLoad
     override func viewDidLoad() {
         print("Hello world!")
@@ -22,14 +23,16 @@ class MainVC: UIViewController {
         setupCollectionView()
         configureUI()
         placeCV()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [self] in
+            showWhatsNew()
+        }
     }
-    
     
     // MARK: - UI func
     
     func configureUI() {
         view.addSubviews(collectionView)
-        
         
     }
     
@@ -44,12 +47,17 @@ class MainVC: UIViewController {
         collectionView.alwaysBounceVertical = true
         collectionView.isScrollEnabled = true
     }
-
     
     private func placeCV() {
         collectionView.snp.makeConstraints { make in
             make.leading.trailing.top.bottom.equalTo(view)
         }
+    }
+    
+    private func showWhatsNew() {
+        let whatsNewViewController = UIHostingController(rootView: WhatsNewView())
+        whatsNewViewController.modalPresentationStyle = .pageSheet
+        present(whatsNewViewController, animated: true)
     }
 }
 

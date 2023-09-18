@@ -1,0 +1,34 @@
+//
+//  WhatsNewView.swift
+//  Ambience
+//
+//  Created by Eugene Kovs on 02.09.2023.
+//
+
+import SwiftUI
+
+import SwiftUI
+import WhatsNewPack
+
+struct WhatsNewView: View {
+    
+    @State private var isShowing = false
+    let features: [Feature] = load(fileName: "New.json")
+    
+    var body: some View {
+        Button {
+            isShowing.toggle()
+        } label: {
+            Text("Show what's new!")
+        }
+        .sheet(isPresented: $isShowing) {
+            WhatsNew(featureObject: features.first!, title: "What's new?", color: .purple, buttonTitle: "Continue", buttonColor: .blue, buttonCornerRadius: 20) {
+                printFeature()
+            }
+        }
+    }
+    
+    func printFeature() {
+        print(features.first!)
+    }
+}

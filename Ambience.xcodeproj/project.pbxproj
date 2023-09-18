@@ -43,6 +43,9 @@
 		4EFF69C92A3A05DB0027ED54 /* DataRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EFF69C82A3A05DB0027ED54 /* DataRequest.swift */; };
 		4EFF69CB2A3A06230027ED54 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EFF69CA2A3A06230027ED54 /* NetworkService.swift */; };
 		4EFF69CD2A3A06440027ED54 /* ErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EFF69CC2A3A06440027ED54 /* ErrorResponse.swift */; };
+		E5055E772AA385FA00651504 /* WhatsNewPack in Frameworks */ = {isa = PBXBuildFile; productRef = E5055E762AA385FA00651504 /* WhatsNewPack */; };
+		E5055E7C2AA3884E00651504 /* WhatsNewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5055E7B2AA3884E00651504 /* WhatsNewView.swift */; };
+		E5055E7E2AA38B4000651504 /* New.json in Resources */ = {isa = PBXBuildFile; fileRef = E5055E7D2AA38B4000651504 /* New.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -101,6 +104,8 @@
 		4EFF69C82A3A05DB0027ED54 /* DataRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataRequest.swift; sourceTree = "<group>"; };
 		4EFF69CA2A3A06230027ED54 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		4EFF69CC2A3A06440027ED54 /* ErrorResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorResponse.swift; sourceTree = "<group>"; };
+		E5055E7B2AA3884E00651504 /* WhatsNewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatsNewView.swift; sourceTree = "<group>"; };
+		E5055E7D2AA38B4000651504 /* New.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = New.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +113,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E5055E772AA385FA00651504 /* WhatsNewPack in Frameworks */,
 				4E1860F32A23E0C600C8D215 /* SnapKit in Frameworks */,
 				4E68C3562A35176B00704A3F /* UnsplashPhotoPicker in Frameworks */,
 			);
@@ -152,6 +158,7 @@
 		4E1860D92A23B10500C8D215 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				E5055E7A2AA3883A00651504 /* WhatsNew */,
 				4E8776EC2A26FA37004E3AF9 /* AmbiVC */,
 				4E1860DC2A23B12800C8D215 /* MainVC */,
 			);
@@ -181,6 +188,7 @@
 			children = (
 				4E1860DD2A23B13600C8D215 /* MainVC.swift */,
 				4E1860DF2A23B14300C8D215 /* MainVCPresenter.swift */,
+				E5055E7D2AA38B4000651504 /* New.json */,
 			);
 			name = MainVC;
 			sourceTree = "<group>";
@@ -407,6 +415,14 @@
 			name = "Network layer";
 			sourceTree = "<group>";
 		};
+		E5055E7A2AA3883A00651504 /* WhatsNew */ = {
+			isa = PBXGroup;
+			children = (
+				E5055E7B2AA3884E00651504 /* WhatsNewView.swift */,
+			);
+			name = WhatsNew;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -417,6 +433,7 @@
 				4E4A04492A234CF700F6CD93 /* Sources */,
 				4E4A044A2A234CF700F6CD93 /* Frameworks */,
 				4E4A044B2A234CF700F6CD93 /* Resources */,
+				E55069822AB8D64E005E7C94 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -426,6 +443,7 @@
 			packageProductDependencies = (
 				4E1860F22A23E0C600C8D215 /* SnapKit */,
 				4E68C3552A35176B00704A3F /* UnsplashPhotoPicker */,
+				E5055E762AA385FA00651504 /* WhatsNewPack */,
 			);
 			productName = Ambience;
 			productReference = 4E4A044D2A234CF700F6CD93 /* Ambience.app */;
@@ -502,6 +520,7 @@
 			packageReferences = (
 				4E1860F12A23E0C600C8D215 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				4E68C3542A35176B00704A3F /* XCRemoteSwiftPackageReference "unsplash-photopicker-ios" */,
+				E5055E752AA385FA00651504 /* XCRemoteSwiftPackageReference "WhatsNewPack" */,
 			);
 			productRefGroup = 4E4A044E2A234CF700F6CD93 /* Products */;
 			projectDirPath = "";
@@ -521,6 +540,7 @@
 			files = (
 				4ECFE9E72A3232D00025C446 /* PeacefullNightAmbi.mp3 in Resources */,
 				4ECFE9E12A322FFB0025C446 /* BlueForestAmbi.mp3 in Resources */,
+				E5055E7E2AA38B4000651504 /* New.json in Resources */,
 				4E4A045D2A234CF900F6CD93 /* LaunchScreen.storyboard in Resources */,
 				4ECFE9F32A32358E0025C446 /* WarmCampfireAmbi.mp3 in Resources */,
 				4ECFE9ED2A3233BB0025C446 /* SilentWinterAmbi.mp3 in Resources */,
@@ -548,6 +568,26 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		E55069822AB8D64E005E7C94 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [[ \"$(uname -m)\" == arm64 ]]; then\n    export PATH=\"/opt/homebrew/bin:$PATH\"\nfi\n\nif which swiftlint > /dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		4E4A04492A234CF700F6CD93 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -561,6 +601,7 @@
 				4E1860F52A24BFE900C8D215 /* Extensions.swift in Sources */,
 				4E4A04532A234CF700F6CD93 /* SceneDelegate.swift in Sources */,
 				4E1860EE2A23C03200C8D215 /* AmbienceManager.swift in Sources */,
+				E5055E7C2AA3884E00651504 /* WhatsNewView.swift in Sources */,
 				4EFF69C92A3A05DB0027ED54 /* DataRequest.swift in Sources */,
 				4EB87DB52A4F6FCA0064C2EE /* ImageRequest.swift in Sources */,
 				4E4DCDED2A50BE9F00BFEC4E /* APICaller.swift in Sources */,
@@ -754,7 +795,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.0;
+				MARKETING_VERSION = 4.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.CodingKovs.Ambience;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -785,7 +826,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.0;
+				MARKETING_VERSION = 4.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.CodingKovs.Ambience;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -931,6 +972,14 @@
 				minimumVersion = 1.0.0;
 			};
 		};
+		E5055E752AA385FA00651504 /* XCRemoteSwiftPackageReference "WhatsNewPack" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kovs705/WhatsNewPack.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -943,6 +992,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 4E68C3542A35176B00704A3F /* XCRemoteSwiftPackageReference "unsplash-photopicker-ios" */;
 			productName = UnsplashPhotoPicker;
+		};
+		E5055E762AA385FA00651504 /* WhatsNewPack */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E5055E752AA385FA00651504 /* XCRemoteSwiftPackageReference "WhatsNewPack" */;
+			productName = WhatsNewPack;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

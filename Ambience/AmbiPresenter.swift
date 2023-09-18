@@ -63,7 +63,6 @@ final class AmbiPresenter: AmbiPresenterProtocol {
         self.APICaller = caller
     }
     
-    
     // MARK: - AVPlayer functionality
     func playPause() {
         if view?.isPlaying == true {
@@ -127,7 +126,6 @@ final class AmbiPresenter: AmbiPresenterProtocol {
         return shuffledAmbience
     }
     
-    
     func showMore(vc: UIViewController) {
         // more sounds at MixKit
         // func on the bottom
@@ -160,7 +158,6 @@ final class AmbiPresenter: AmbiPresenterProtocol {
                         return
                     }
                     
-                    
                 case .failure(let error):
                     print(error)
                 }
@@ -174,6 +171,5 @@ final class AmbiPresenter: AmbiPresenterProtocol {
         }
         
     }
-                                                    
     
 }

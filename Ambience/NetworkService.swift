@@ -54,4 +54,3 @@ final class DefaultNetworkService: NetworkService {
         return try request.decode(data)
     }
 }
-

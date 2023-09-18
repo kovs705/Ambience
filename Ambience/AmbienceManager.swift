@@ -26,5 +26,4 @@ class AmbienceManager: AmbienceManagerProtocol {
         Ambience(name: "Calm underwater", firstColor: UIColor(named: Colors.CalmUnderwater.one)!, secondColor: UIColor(named: Colors.CalmUnderwater.two)!, image: Images.calmUnderwater, pathToSound: Sounds.calmUnderwater)
     ]
     
-    
 }

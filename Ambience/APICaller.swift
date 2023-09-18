@@ -14,7 +14,7 @@ class APICaller {
     
     struct Web {
         static let accessKey: String = "ThgR5z9J9aWH2GK2dWuMf9A9Ei3JZT8ygBCGwQmcGXI"
-        static let baseURL:   String = "https://api.unsplash.com"
+        static let baseURL: String = "https://api.unsplash.com"
         static let searchURL: String = "/search/photos?query="
     }
     

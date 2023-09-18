@@ -75,4 +75,3 @@ extension ImageClient: ImageClientService {
         }
     }
 }
-

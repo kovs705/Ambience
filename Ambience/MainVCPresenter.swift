@@ -26,5 +26,4 @@ final class MainVCPresenter: MainVCPresenterProtocol {
         self.ambiences = ambiences
     }
     
-    
 }

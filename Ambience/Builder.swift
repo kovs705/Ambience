@@ -12,7 +12,6 @@ protocol BuilderProtocol {
     func getDetailModule(ambience: Ambience) -> UIViewController
 }
 
-
 final class Builder: BuilderProtocol {
     
     func getMainModule() -> UIViewController {

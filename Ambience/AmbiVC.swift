@@ -104,7 +104,7 @@ class AmbiVC: UIViewController {
         ambienceImage.snp.makeConstraints { make in
             make.top.equalTo(view).inset(170)
             make.leading.trailing.equalTo(view).inset(40)
-            make.height.equalTo(300)
+            make.height.equalTo(view.snp.width).inset(40)
         }
         
         ambienceImage.contentMode = .scaleAspectFill
@@ -164,7 +164,6 @@ class AmbiVC: UIViewController {
         ImageClient.shared.clearCache()
     }
     
-    
     // MARK: - Obj-c funcs
     @objc func handleSwipeGesture(_ sender: UISwipeGestureRecognizer) {
         if sender.direction == .down {
@@ -192,7 +191,6 @@ class AmbiVC: UIViewController {
     }
     
 }
-
 
 // MARK: - Protocol
 extension AmbiVC: AmbiViewProtocol {
@@ -226,7 +224,6 @@ extension AmbiVC: AmbiViewProtocol {
         }
     }
     
-    
     // MARK: - PlayPauseImage
     func givePlayPauseImage() {
         DispatchQueue.main.async { [weak self] in
@@ -238,7 +235,6 @@ extension AmbiVC: AmbiViewProtocol {
             }
         }
     }
-    
     
     // MARK: - Close func
     func optimizeClose() {
@@ -262,7 +258,6 @@ extension AmbiVC: AmbiViewProtocol {
         }
     }
     
-    
     // MARK: - Change photo
     func changePhoto() {
         guard let randomImage = images.randomElement()?.urls.small,
@@ -283,7 +278,7 @@ extension AmbiVC: AmbiViewProtocol {
     
     func putNewImage(image: UIImage) async {
         DispatchQueue.main.async { [weak self] in
-            guard let self  = self else { return }
+            guard let self = self else { return }
             
             self.imageView.layer.add(UIHelper.giveOpacityAnimation(duration: 0.5, from: 1, toValue: 0), forKey: "opacityAnimation")
             self.ambienceImage.layer.add(UIHelper.giveOpacityAnimation(duration: 0.5, from: 1, toValue: 0), forKey: "opacityAnimation")
@@ -305,6 +300,3 @@ extension AmbiVC: AmbiViewProtocol {
     }
     
 }
-
-
-
