@@ -8,7 +8,7 @@
 import UIKit
 
 protocol MainVCViewProtocol: AnyObject {
-    
+
 }
 
 protocol MainVCPresenterProtocol: AnyObject {
@@ -17,13 +17,13 @@ protocol MainVCPresenterProtocol: AnyObject {
 }
 
 final class MainVCPresenter: MainVCPresenterProtocol {
-    
+
     weak var view: MainVCViewProtocol?
     var ambiences: AmbienceManagerProtocol?
-    
+
     required init(view: MainVCViewProtocol, ambiences: AmbienceManagerProtocol?) {
         self.view = view
         self.ambiences = ambiences
     }
-    
+
 }

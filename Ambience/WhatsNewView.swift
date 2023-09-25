@@ -7,14 +7,13 @@
 
 import SwiftUI
 
-import SwiftUI
 import WhatsNewPack
 
 struct WhatsNewView: View {
-    
+
     @State private var isShowing = false
     let features: [Feature] = load(fileName: "New.json")
-    
+
     var body: some View {
         Button {
             isShowing.toggle()
@@ -27,7 +26,7 @@ struct WhatsNewView: View {
             }
         }
     }
-    
+
     func printFeature() {
         print(features.first!)
     }

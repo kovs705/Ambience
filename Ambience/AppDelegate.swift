@@ -5,7 +5,7 @@
 //  Created by Kovs on 28.05.2023.
 // 28.05 - 1 day
 // After making a Test task for "Решение" company, 09.06, I added sounds
-//TODO: Add sounds for HighestMountains
+// TODO: Add sounds for HighestMountains
 
 import UIKit
 
