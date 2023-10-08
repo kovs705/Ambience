@@ -223,7 +223,7 @@ extension AmbiVC: AmbiViewProtocol {
                 self.ambienceImage.layer.add(UIHelper.giveOpacityAnimation(duration: 1, from: 0, toValue: 1), forKey: "opacityAnimation")
             }
         } catch {
-            print("Error loading image:", error)
+            print("Error loading image:", error.localizedDescription)
         }
     }
 
