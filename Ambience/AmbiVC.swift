@@ -18,11 +18,13 @@ class AmbiVC: UIViewController {
     private var unsplashB     = UIButton()
     
     private var ambienceImage = UIImageView()
+    private var progressView  = UIActivityIndicatorView()
+    
     private var soundB        = UIButton()
     private var shuffleB      = UIButton()
     private var nameLabel     = UILabel()
     
-    private var showMore      = UIButton() // more sounds on MixKit
+    private var showMore      = UIButton()
     
     var player: AVAudioPlayer?
     var isPlaying = false
@@ -59,6 +61,8 @@ class AmbiVC: UIViewController {
         view.addSubviews(imageView, ambienceImage, closeB, unsplashB, soundB, shuffleB)
         placeImageView()
         placeAmbienceImage()
+        
+        ambienceImage.addSubviews(progressView)
     }
     
     func configureButtons() {
@@ -110,6 +114,17 @@ class AmbiVC: UIViewController {
         ambienceImage.contentMode = .scaleAspectFill
         ambienceImage.clipsToBounds = true
         ambienceImage.layer.cornerRadius = 16
+    }
+    
+    func placeProgressView() {
+        ambienceImage.snp.makeConstraints { make in
+            make.center.equalTo(ambienceImage.snp.center)
+        }
+        
+        progressView.startAnimating()
+        progressView.hidesWhenStopped = true
+        progressView.style = .medium
+        progressView.color = UIColor.white
     }
     
     func placeCloseB() {
@@ -263,6 +278,13 @@ extension AmbiVC: AmbiViewProtocol {
         guard let randomImage = images.randomElement()?.urls.small,
               let ambience = self.presenter.ambience else { return }
         
+        DispatchQueue.main.async {
+            self.progressView.isHidden = false
+            self.progressView.startAnimating()
+        }
+        
+        hideImage()
+        
         Task {
             do {
                 if let image = try await ImageClient.shared.setImage(from: randomImage, placeholderImage: UIImage(named: ambience.image)) {
@@ -276,16 +298,23 @@ extension AmbiVC: AmbiViewProtocol {
         }
     }
     
-    func putNewImage(image: UIImage) async {
+    func hideImage() {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             
-            self.imageView.layer.add(UIHelper.giveOpacityAnimation(duration: 0.5, from: 1, toValue: 0), forKey: "opacityAnimation")
             self.ambienceImage.layer.add(UIHelper.giveOpacityAnimation(duration: 0.5, from: 1, toValue: 0), forKey: "opacityAnimation")
             
             self.imageView.image     = nil
             self.ambienceImage.image = nil
             
+        }
+    }
+    
+    func putNewImage(image: UIImage) async {
+        
+        DispatchQueue.main.async {
+            self.progressView.isHidden = true
+            self.progressView.stopAnimating()
         }
         
         DispatchQueue.main.async { [weak self] in
@@ -293,8 +322,8 @@ extension AmbiVC: AmbiViewProtocol {
             self.imageView.image = image
             self.ambienceImage.image = image
             
-            self.imageView.layer.add(UIHelper.giveOpacityAnimation(duration: 0.5, from: 0, toValue: 1), forKey: "opacityAnimation")
-            self.ambienceImage.layer.add(UIHelper.giveOpacityAnimation(duration: 0.5, from: 0, toValue: 1), forKey: "opacityAnimation")
+            self.imageView.layer.add(UIHelper.giveOpacityAnimation(duration: 1, from: 0, toValue: 1), forKey: "opacityAnimation")
+            self.ambienceImage.layer.add(UIHelper.giveOpacityAnimation(duration: 1, from: 0, toValue: 1), forKey: "opacityAnimation")
         }
         
     }

@@ -176,6 +176,7 @@
 		4E1860DB2A23B11F00C8D215 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				E5055E7D2AA38B4000651504 /* New.json */,
 				4EFF69C32A39B69A0027ED54 /* Unsplash */,
 				4ECFE9D62A322F950025C446 /* Sounds */,
 				4EFF69C42A39B6AB0027ED54 /* Ambience */,
@@ -188,7 +189,6 @@
 			children = (
 				4E1860DD2A23B13600C8D215 /* MainVC.swift */,
 				4E1860DF2A23B14300C8D215 /* MainVCPresenter.swift */,
-				E5055E7D2AA38B4000651504 /* New.json */,
 			);
 			name = MainVC;
 			sourceTree = "<group>";

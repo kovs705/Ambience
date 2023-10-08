@@ -137,26 +137,15 @@ final class AmbiPresenter: AmbiPresenterProtocol {
         
         if view.images.isEmpty {
             let ambienceWord: String = ambience.name
-            print(ambienceWord)
-            
+
             guard let APICaller = APICaller else { return }
             APICaller.createRequestAndFetchPhotos(with: ambienceWord, completion: { [weak self] result in
                 guard let self = self else { return }
                 switch result {
                 case .success(let images):
-                    print(images)
-                    if ((self.view?.images.isEmpty) != nil) {
-                        addContents(of: images)
-                        print("Cool!")
-                        self.view?.changePhoto()
-                        return
-                    } else {
-                        print("There are some photos")
-                        self.view?.images.removeAll()
-                        addContents(of: images)
-                        self.view?.changePhoto()
-                        return
-                    }
+                    addContents(of: images)
+                    print("Cool!")
+                    self.view?.changePhoto()
                     
                 case .failure(let error):
                     print(error)

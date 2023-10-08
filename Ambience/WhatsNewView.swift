@@ -12,23 +12,13 @@ import WhatsNewPack
 
 struct WhatsNewView: View {
     
-    @State private var isShowing = false
     let features: [Feature] = load(fileName: "New.json")
+    @Environment(\.dismiss) var dismiss
     
     var body: some View {
-        Button {
-            isShowing.toggle()
-        } label: {
-            Text("Show what's new!")
-        }
-        .sheet(isPresented: $isShowing) {
-            WhatsNew(featureObject: features.first!, title: "What's new?", color: .purple, buttonTitle: "Continue", buttonColor: .blue, buttonCornerRadius: 20) {
-                printFeature()
-            }
+        WhatsNew(featureObject: features.first!, title: "What's new?", color: .purple, buttonTitle: "Continue", buttonColor: .blue, buttonCornerRadius: 20) {
+            dismiss()
         }
     }
     
-    func printFeature() {
-        print(features.first!)
-    }
 }

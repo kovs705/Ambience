@@ -18,7 +18,6 @@ class MainVC: UIViewController {
     
     // MARK: - viewDidLoad
     override func viewDidLoad() {
-        print("Hello world!")
         
         setupCollectionView()
         configureUI()
