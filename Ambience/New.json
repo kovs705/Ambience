@@ -1,0 +1,41 @@
+[
+    {
+    "version": "1.2",
+    "new": [
+        {
+            "body": "Immersive 3D sounds of nature right in your pocket",
+            "icon": "airpodsmax",
+            "title": "Spatial audio",
+            "subtitle": "Now supported"
+        },
+        
+        {
+            "body": "Get ready for new way of interacting with interface",
+            "icon": "aqi.low",
+            "title": "New animations",
+            "subtitle": "Redesigned way"
+        },
+        
+        {
+            "body": "Get ready for new way of interacting with interface",
+            "icon": "photo.on.rectangle.angled",
+            "title": "Unsplash experience",
+            "subtitle": "Change images"
+        },
+        
+        {
+            "body": "Get ready for new way of interacting with interface",
+            "icon": "aqi.low",
+            "title": "New animations",
+            "subtitle": "Redesigned way"
+        },
+        
+        {
+            "body": "Immersive 3D sounds of nature right in your pocket",
+            "icon": "airpodsmax",
+            "title": "Spatial audio",
+            "subtitle": "Now supported"
+        }
+    ]
+}
+]

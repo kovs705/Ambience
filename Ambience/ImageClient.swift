@@ -15,27 +15,27 @@ protocol ImageClientService {
 final class ImageClient {
     let service: NetworkService = DefaultNetworkService()
     static let shared = ImageClient(responseQueue: .main, session: URLSession.shared)
-    
+
     private(set) var cachedImageForURL: [String: UIImage]
     let responseQueue: DispatchQueue?
     let session: URLSession
-    
+
     init(responseQueue: DispatchQueue?, session: URLSession) {
         self.cachedImageForURL = [:]
         self.responseQueue = responseQueue
         self.session = session
     }
-    
+
     func clearCache() {
         cachedImageForURL.removeAll()
     }
-    
+
     private func dispatchImage(image: UIImage? = nil, error: Error? = nil, completion: @escaping (UIImage?, Error?) -> Void) {
         guard let responseQueue = responseQueue else {
             completion(image, error)
             return
         }
-        
+
         responseQueue.async {
             completion(image, error)
         }
@@ -54,11 +54,11 @@ extension ImageClient: ImageClientService {
             throw error
         }
     }
-    
+
     func setImage(from url: String,
                   placeholderImage: UIImage?) async throws -> UIImage? {
         let request = ImageRequest(url: url)
-        
+
         if let cacheImage = cachedImageForURL[url] {
             return cacheImage
         } else {
@@ -75,4 +75,3 @@ extension ImageClient: ImageClientService {
         }
     }
 }
-

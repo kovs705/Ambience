@@ -1,0 +1,32 @@
+{
+  "pins" : [
+    {
+      "identity" : "snapkit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SnapKit/SnapKit",
+      "state" : {
+        "revision" : "f222cbdf325885926566172f6f5f06af95473158",
+        "version" : "5.6.0"
+      }
+    },
+    {
+      "identity" : "unsplash-photopicker-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/unsplash/unsplash-photopicker-ios",
+      "state" : {
+        "revision" : "7306a92362855ec41149e5e214c63089586653f4",
+        "version" : "1.3.0"
+      }
+    },
+    {
+      "identity" : "whatsnewpack",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/kovs705/WhatsNewPack.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "336e8d5027aab1124621058b11f18ca4e169fcc9"
+      }
+    }
+  ],
+  "version" : 2
+}
