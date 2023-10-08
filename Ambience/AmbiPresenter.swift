@@ -67,9 +67,7 @@ final class AmbiPresenter: AmbiPresenterProtocol {
     func playPause() {
         if view?.isPlaying == true {
             stop()
-            print("pause")
         } else {
-            print("play")
             play()
         }
     }
@@ -80,7 +78,7 @@ final class AmbiPresenter: AmbiPresenterProtocol {
         DispatchQueue.global().async { [weak self] in
             guard let self = self else { return }
             guard let path = Bundle.main.url(forResource: sound, withExtension: "mp3") else { return }
-            print("Success")
+            
             do {
                 try self.player = AVAudioPlayer(contentsOf: path)
                 self.player?.numberOfLoops = 50
@@ -118,7 +116,7 @@ final class AmbiPresenter: AmbiPresenterProtocol {
         ambience = random
         view?.shuffleIt()
         view?.images.removeAll()
-        print("Shuffled")
+
     }
 
     func giveRandomAmbi() -> Ambience {
@@ -145,11 +143,10 @@ final class AmbiPresenter: AmbiPresenterProtocol {
                 switch result {
                 case .success(let images):
                     addContents(of: images)
-                    print("Cool!")
                     self.view?.changePhoto()
                     
                 case .failure(let error):
-                    print(error)
+                    print(error.localizedDescription)
                 }
 
                 func addContents(of images: [ImageResult]) {

@@ -39,7 +39,6 @@ class APICaller {
                 let results = try JSONDecoder().decode(Results.self, from: data)
                 completion(.success(results.results))
             } catch {
-                print(error)
                 completion(.failure(error))
             }
         }

@@ -47,7 +47,6 @@ final class DefaultNetworkService: NetworkService {
 
         guard let httpResponse = response as? HTTPURLResponse,
               200..<300 ~= httpResponse.statusCode else {
-            print("response is \(response)")
             throw NSError()
         }
 
