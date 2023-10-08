@@ -13,7 +13,7 @@ protocol BuilderProtocol {
 }
 
 final class Builder: BuilderProtocol {
-    
+
     func getMainModule() -> UIViewController {
         let view = MainVC()
         let ambienceManager = AmbienceManager()
@@ -21,7 +21,7 @@ final class Builder: BuilderProtocol {
         view.presenter = presenter
         return view
     }
-    
+
     func getDetailModule(ambience: Ambience) -> UIViewController {
         let view = AmbiVC()
         let networkService = DefaultNetworkService()

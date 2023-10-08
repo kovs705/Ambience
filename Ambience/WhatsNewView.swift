@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-import SwiftUI
 import WhatsNewPack
 
 struct WhatsNewView: View {

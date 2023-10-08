@@ -9,11 +9,11 @@ import UIKit
 
 protocol AmbienceManagerProtocol {
     var all: [Ambience] { get }
-    
+
 }
 
 class AmbienceManager: AmbienceManagerProtocol {
-    
+
     var all: [Ambience] = [
         Ambience(name: "Blue forest", firstColor: UIColor(named: Colors.BlueForest.one)!, secondColor: UIColor(named: Colors.BlueForest.two)!, image: Images.blueForest, pathToSound: Sounds.blueForest),
         Ambience(name: "Peacefull night", firstColor: UIColor(named: Colors.PeacefullNight.one)!, secondColor: UIColor(named: Colors.PeacefullNight.two)!, image: Images.peacefullNight, pathToSound: Sounds.peacefullNight),
@@ -25,5 +25,5 @@ class AmbienceManager: AmbienceManagerProtocol {
         Ambience(name: "Magic", firstColor: UIColor(named: Colors.Magic.one)!, secondColor: UIColor(named: Colors.Magic.two)!, image: Images.magic, pathToSound: Sounds.magic),
         Ambience(name: "Calm underwater", firstColor: UIColor(named: Colors.CalmUnderwater.one)!, secondColor: UIColor(named: Colors.CalmUnderwater.two)!, image: Images.calmUnderwater, pathToSound: Sounds.calmUnderwater)
     ]
-    
+
 }
