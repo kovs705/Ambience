@@ -134,81 +134,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		4E1860D32A23AF9F00C8D215 /* Business logic layer */ = {
-			isa = PBXGroup;
-			children = (
-				4E1860EC2A23C00600C8D215 /* Managers */,
-				4E1860E42A23B6B600C8D215 /* UIHelper */,
-				4E1860DB2A23B11F00C8D215 /* Model */,
-			);
-			name = "Business logic layer";
-			sourceTree = "<group>";
-		};
-		4E1860D82A23B08000C8D215 /* Presentation layer */ = {
-			isa = PBXGroup;
-			children = (
-				4E1860D92A23B10500C8D215 /* Views */,
-				4E1860DA2A23B11200C8D215 /* Subviews */,
-			);
-			name = "Presentation layer";
-			sourceTree = "<group>";
-		};
-		4E1860D92A23B10500C8D215 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				E5055E7A2AA3883A00651504 /* WhatsNew */,
-				4E8776EC2A26FA37004E3AF9 /* AmbiVC */,
-				4E1860DC2A23B12800C8D215 /* MainVC */,
-			);
-			name = Views;
-			sourceTree = "<group>";
-		};
-		4E1860DA2A23B11200C8D215 /* Subviews */ = {
-			isa = PBXGroup;
-			children = (
-				4E1860E82A23B8F000C8D215 /* AmbiCell.swift */,
-			);
-			name = Subviews;
-			sourceTree = "<group>";
-		};
-		4E1860DB2A23B11F00C8D215 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				E5055E7D2AA38B4000651504 /* New.json */,
-				4EFF69C32A39B69A0027ED54 /* Unsplash */,
-				4ECFE9D62A322F950025C446 /* Sounds */,
-				4EFF69C42A39B6AB0027ED54 /* Ambience */,
-			);
-			name = Model;
-			sourceTree = "<group>";
-		};
-		4E1860DC2A23B12800C8D215 /* MainVC */ = {
-			isa = PBXGroup;
-			children = (
-				4E1860DD2A23B13600C8D215 /* MainVC.swift */,
-				4E1860DF2A23B14300C8D215 /* MainVCPresenter.swift */,
-			);
-			name = MainVC;
-			sourceTree = "<group>";
-		};
-		4E1860E42A23B6B600C8D215 /* UIHelper */ = {
-			isa = PBXGroup;
-			children = (
-				4E1860E52A23B6CA00C8D215 /* UIHelper.swift */,
-				4E1860F42A24BFE900C8D215 /* Extensions.swift */,
-				4E1860EF2A23C3BA00C8D215 /* Constants.swift */,
-			);
-			name = UIHelper;
-			sourceTree = "<group>";
-		};
-		4E1860EC2A23C00600C8D215 /* Managers */ = {
-			isa = PBXGroup;
-			children = (
-				4E1860ED2A23C03200C8D215 /* AmbienceManager.swift */,
-			);
-			name = Managers;
-			sourceTree = "<group>";
-		};
 		4E20278C2A23968300FD6C4D /* Plist */ = {
 			isa = PBXGroup;
 			children = (
@@ -216,18 +141,6 @@
 			);
 			name = Plist;
 			path = Ambience;
-			sourceTree = "<group>";
-		};
-		4E20278D2A23969900FD6C4D /* Support */ = {
-			isa = PBXGroup;
-			children = (
-				4E4A045B2A234CF900F6CD93 /* LaunchScreen.storyboard */,
-				4E4A04502A234CF700F6CD93 /* AppDelegate.swift */,
-				4E1860E12A23B3CC00C8D215 /* Builder.swift */,
-				4E4A04522A234CF700F6CD93 /* SceneDelegate.swift */,
-				4E4A04592A234CF900F6CD93 /* Assets.xcassets */,
-			);
-			name = Support;
 			sourceTree = "<group>";
 		};
 		4E4A04442A234CF700F6CD93 = {
@@ -254,11 +167,11 @@
 		4E4A044F2A234CF700F6CD93 /* Ambience */ = {
 			isa = PBXGroup;
 			children = (
-				4E1860D82A23B08000C8D215 /* Presentation layer */,
-				4E1860D32A23AF9F00C8D215 /* Business logic layer */,
-				4EFF69C72A3A05C80027ED54 /* Network layer */,
-				4EB87DB62A4F70190064C2EE /* Transportation layer */,
-				4E20278D2A23969900FD6C4D /* Support */,
+				CEA9622E2B1476770072013B /* Presentation */,
+				CEA962352B1476FD0072013B /* Business logic */,
+				CEA962462B1478300072013B /* Network */,
+				CEA962482B14785E0072013B /* Transportation */,
+				CEA962492B14787B0072013B /* Support */,
 			);
 			path = Ambience;
 			sourceTree = "<group>";
@@ -280,144 +193,231 @@
 			path = AmbienceUITests;
 			sourceTree = "<group>";
 		};
-		4E8776EC2A26FA37004E3AF9 /* AmbiVC */ = {
+		CEA9622E2B1476770072013B /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				CEA9622F2B1476980072013B /* Views */,
+				CEA962332B1476C00072013B /* Subviews */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		CEA9622F2B1476980072013B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				CEA962322B1476B00072013B /* MainVC */,
+				CEA962312B1476A20072013B /* AmbiVC */,
+				CEA962302B14769D0072013B /* WhatsNew */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		CEA962302B14769D0072013B /* WhatsNew */ = {
+			isa = PBXGroup;
+			children = (
+				E5055E7B2AA3884E00651504 /* WhatsNewView.swift */,
+			);
+			path = WhatsNew;
+			sourceTree = "<group>";
+		};
+		CEA962312B1476A20072013B /* AmbiVC */ = {
 			isa = PBXGroup;
 			children = (
 				4E8776ED2A26FA5F004E3AF9 /* AmbiVC.swift */,
 				4E8776EF2A26FA6E004E3AF9 /* AmbiPresenter.swift */,
 			);
-			name = AmbiVC;
+			path = AmbiVC;
 			sourceTree = "<group>";
 		};
-		4EB87DB62A4F70190064C2EE /* Transportation layer */ = {
+		CEA962322B1476B00072013B /* MainVC */ = {
+			isa = PBXGroup;
+			children = (
+				4E1860DD2A23B13600C8D215 /* MainVC.swift */,
+				4E1860DF2A23B14300C8D215 /* MainVCPresenter.swift */,
+			);
+			path = MainVC;
+			sourceTree = "<group>";
+		};
+		CEA962332B1476C00072013B /* Subviews */ = {
+			isa = PBXGroup;
+			children = (
+				4E1860E82A23B8F000C8D215 /* AmbiCell.swift */,
+			);
+			path = Subviews;
+			sourceTree = "<group>";
+		};
+		CEA962352B1476FD0072013B /* Business logic */ = {
+			isa = PBXGroup;
+			children = (
+				CEA962362B1477100072013B /* Managers */,
+				CEA962372B14771A0072013B /* UIHelper */,
+				CEA962382B14772E0072013B /* Model */,
+			);
+			path = "Business logic";
+			sourceTree = "<group>";
+		};
+		CEA962362B1477100072013B /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				4E1860ED2A23C03200C8D215 /* AmbienceManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		CEA962372B14771A0072013B /* UIHelper */ = {
+			isa = PBXGroup;
+			children = (
+				4E1860E52A23B6CA00C8D215 /* UIHelper.swift */,
+				4E1860F42A24BFE900C8D215 /* Extensions.swift */,
+				4E1860EF2A23C3BA00C8D215 /* Constants.swift */,
+			);
+			path = UIHelper;
+			sourceTree = "<group>";
+		};
+		CEA962382B14772E0072013B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E5055E7D2AA38B4000651504 /* New.json */,
+				CEA962392B14773A0072013B /* Unsplash */,
+				CEA9623A2B14774F0072013B /* Sounds */,
+				CEA962442B1478020072013B /* Ambience */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		CEA962392B14773A0072013B /* Unsplash */ = {
+			isa = PBXGroup;
+			children = (
+				4E4DCDEE2A50C30A00BFEC4E /* SearchResult.swift */,
+			);
+			path = Unsplash;
+			sourceTree = "<group>";
+		};
+		CEA9623A2B14774F0072013B /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				CEA9623B2B14776F0072013B /* WarmCampfire */,
+				CEA9623C2B14777A0072013B /* UrbanCity */,
+				CEA962432B1477B30072013B /* SilentWinter */,
+				CEA962422B1477AE0072013B /* SeaWaves */,
+				CEA962412B1477A20072013B /* PeacefullNight */,
+				CEA962402B14779E0072013B /* Magic */,
+				CEA9623F2B1477980072013B /* HighestMount */,
+				CEA9623E2B1477920072013B /* CalmUnder */,
+				CEA9623D2B14778C0072013B /* BlueForest */,
+			);
+			path = Sounds;
+			sourceTree = "<group>";
+		};
+		CEA9623B2B14776F0072013B /* WarmCampfire */ = {
+			isa = PBXGroup;
+			children = (
+				4ECFE9F22A32358E0025C446 /* WarmCampfireAmbi.mp3 */,
+			);
+			path = WarmCampfire;
+			sourceTree = "<group>";
+		};
+		CEA9623C2B14777A0072013B /* UrbanCity */ = {
+			isa = PBXGroup;
+			children = (
+				4ECFE9F02A32357C0025C446 /* UrbanCityAmbi.mp3 */,
+			);
+			path = UrbanCity;
+			sourceTree = "<group>";
+		};
+		CEA9623D2B14778C0072013B /* BlueForest */ = {
+			isa = PBXGroup;
+			children = (
+				4ECFE9E02A322FFB0025C446 /* BlueForestAmbi.mp3 */,
+			);
+			path = BlueForest;
+			sourceTree = "<group>";
+		};
+		CEA9623E2B1477920072013B /* CalmUnder */ = {
+			isa = PBXGroup;
+			children = (
+				4ECFE9E22A3230120025C446 /* CalmUnderwaterAmbi.mp3 */,
+			);
+			path = CalmUnder;
+			sourceTree = "<group>";
+		};
+		CEA9623F2B1477980072013B /* HighestMount */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = HighestMount;
+			sourceTree = "<group>";
+		};
+		CEA962402B14779E0072013B /* Magic */ = {
+			isa = PBXGroup;
+			children = (
+				4ECFE9E42A3230310025C446 /* MagicAmbi.mp3 */,
+			);
+			path = Magic;
+			sourceTree = "<group>";
+		};
+		CEA962412B1477A20072013B /* PeacefullNight */ = {
+			isa = PBXGroup;
+			children = (
+				4ECFE9E62A3232D00025C446 /* PeacefullNightAmbi.mp3 */,
+			);
+			path = PeacefullNight;
+			sourceTree = "<group>";
+		};
+		CEA962422B1477AE0072013B /* SeaWaves */ = {
+			isa = PBXGroup;
+			children = (
+				4ECFE9E82A3232DA0025C446 /* SeaWavesAmbi.mp3 */,
+			);
+			path = SeaWaves;
+			sourceTree = "<group>";
+		};
+		CEA962432B1477B30072013B /* SilentWinter */ = {
+			isa = PBXGroup;
+			children = (
+				4ECFE9EC2A3233BB0025C446 /* SilentWinterAmbi.mp3 */,
+			);
+			path = SilentWinter;
+			sourceTree = "<group>";
+		};
+		CEA962442B1478020072013B /* Ambience */ = {
+			isa = PBXGroup;
+			children = (
+				4E1860EA2A23BCDE00C8D215 /* Ambience.swift */,
+			);
+			path = Ambience;
+			sourceTree = "<group>";
+		};
+		CEA962462B1478300072013B /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				4EFF69CA2A3A06230027ED54 /* NetworkService.swift */,
+				4EFF69C82A3A05DB0027ED54 /* DataRequest.swift */,
+				4EFF69CC2A3A06440027ED54 /* ErrorResponse.swift */,
+				4EB87DB22A4F6FA40064C2EE /* ImageClient.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		CEA962482B14785E0072013B /* Transportation */ = {
 			isa = PBXGroup;
 			children = (
 				4EB87DB42A4F6FCA0064C2EE /* ImageRequest.swift */,
 				4E4DCDEC2A50BE9F00BFEC4E /* APICaller.swift */,
 			);
-			name = "Transportation layer";
+			path = Transportation;
 			sourceTree = "<group>";
 		};
-		4ECFE9D62A322F950025C446 /* Sounds */ = {
+		CEA962492B14787B0072013B /* Support */ = {
 			isa = PBXGroup;
 			children = (
-				4ECFE9DF2A322FEB0025C446 /* WarmCampfire */,
-				4ECFE9DE2A322FE40025C446 /* UrbanCity */,
-				4ECFE9DD2A322FDC0025C446 /* SilentWinter */,
-				4ECFE9DC2A322FD50025C446 /* SeaWaves */,
-				4ECFE9DB2A322FCD0025C446 /* PeacefullNight */,
-				4ECFE9DA2A322FC70025C446 /* Magic */,
-				4ECFE9D92A322FAE0025C446 /* HighestMount */,
-				4ECFE9D82A322FA70025C446 /* CalmUnder */,
-				4ECFE9D72A322F9F0025C446 /* BlueForest */,
+				4E4A045B2A234CF900F6CD93 /* LaunchScreen.storyboard */,
+				4E4A04502A234CF700F6CD93 /* AppDelegate.swift */,
+				4E1860E12A23B3CC00C8D215 /* Builder.swift */,
+				4E4A04522A234CF700F6CD93 /* SceneDelegate.swift */,
+				4E4A04592A234CF900F6CD93 /* Assets.xcassets */,
 			);
-			name = Sounds;
-			sourceTree = "<group>";
-		};
-		4ECFE9D72A322F9F0025C446 /* BlueForest */ = {
-			isa = PBXGroup;
-			children = (
-				4ECFE9E02A322FFB0025C446 /* BlueForestAmbi.mp3 */,
-			);
-			name = BlueForest;
-			sourceTree = "<group>";
-		};
-		4ECFE9D82A322FA70025C446 /* CalmUnder */ = {
-			isa = PBXGroup;
-			children = (
-				4ECFE9E22A3230120025C446 /* CalmUnderwaterAmbi.mp3 */,
-			);
-			name = CalmUnder;
-			sourceTree = "<group>";
-		};
-		4ECFE9D92A322FAE0025C446 /* HighestMount */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = HighestMount;
-			sourceTree = "<group>";
-		};
-		4ECFE9DA2A322FC70025C446 /* Magic */ = {
-			isa = PBXGroup;
-			children = (
-				4ECFE9E42A3230310025C446 /* MagicAmbi.mp3 */,
-			);
-			name = Magic;
-			sourceTree = "<group>";
-		};
-		4ECFE9DB2A322FCD0025C446 /* PeacefullNight */ = {
-			isa = PBXGroup;
-			children = (
-				4ECFE9E62A3232D00025C446 /* PeacefullNightAmbi.mp3 */,
-			);
-			name = PeacefullNight;
-			sourceTree = "<group>";
-		};
-		4ECFE9DC2A322FD50025C446 /* SeaWaves */ = {
-			isa = PBXGroup;
-			children = (
-				4ECFE9E82A3232DA0025C446 /* SeaWavesAmbi.mp3 */,
-			);
-			name = SeaWaves;
-			sourceTree = "<group>";
-		};
-		4ECFE9DD2A322FDC0025C446 /* SilentWinter */ = {
-			isa = PBXGroup;
-			children = (
-				4ECFE9EC2A3233BB0025C446 /* SilentWinterAmbi.mp3 */,
-			);
-			name = SilentWinter;
-			sourceTree = "<group>";
-		};
-		4ECFE9DE2A322FE40025C446 /* UrbanCity */ = {
-			isa = PBXGroup;
-			children = (
-				4ECFE9F02A32357C0025C446 /* UrbanCityAmbi.mp3 */,
-			);
-			name = UrbanCity;
-			sourceTree = "<group>";
-		};
-		4ECFE9DF2A322FEB0025C446 /* WarmCampfire */ = {
-			isa = PBXGroup;
-			children = (
-				4ECFE9F22A32358E0025C446 /* WarmCampfireAmbi.mp3 */,
-			);
-			name = WarmCampfire;
-			sourceTree = "<group>";
-		};
-		4EFF69C32A39B69A0027ED54 /* Unsplash */ = {
-			isa = PBXGroup;
-			children = (
-				4E4DCDEE2A50C30A00BFEC4E /* SearchResult.swift */,
-			);
-			name = Unsplash;
-			sourceTree = "<group>";
-		};
-		4EFF69C42A39B6AB0027ED54 /* Ambience */ = {
-			isa = PBXGroup;
-			children = (
-				4E1860EA2A23BCDE00C8D215 /* Ambience.swift */,
-			);
-			name = Ambience;
-			sourceTree = "<group>";
-		};
-		4EFF69C72A3A05C80027ED54 /* Network layer */ = {
-			isa = PBXGroup;
-			children = (
-				4EFF69C82A3A05DB0027ED54 /* DataRequest.swift */,
-				4EFF69CA2A3A06230027ED54 /* NetworkService.swift */,
-				4EFF69CC2A3A06440027ED54 /* ErrorResponse.swift */,
-				4EB87DB22A4F6FA40064C2EE /* ImageClient.swift */,
-			);
-			name = "Network layer";
-			sourceTree = "<group>";
-		};
-		E5055E7A2AA3883A00651504 /* WhatsNew */ = {
-			isa = PBXGroup;
-			children = (
-				E5055E7B2AA3884E00651504 /* WhatsNewView.swift */,
-			);
-			name = WhatsNew;
+			path = Support;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
