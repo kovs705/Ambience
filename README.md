@@ -3,15 +3,23 @@ Pet-project app to listen to ambient sounds of nature (or melodies) with images 
 
 "Ambience" - stack of sounds with its pictures and mood 
 
+## Instalation
+- cd to the root directory of the project
+- type 'xcodegen generate'
+- open newly appeared .xcodeproj file as usual!
+
 ## Stack
 - MVP
 - [Unsplash API](https://unsplash.com/developers)
-- SnapKit
+- [SnapKit](https://github.com/SnapKit/SnapKit)
+- [WhatsNewPack](https://github.com/kovs705/WhatsNewPack)
+- [XCodeGen](https://github.com/yonaskolb/XcodeGen)
 
 ## Requirements
 - Internet connection
 - iPhone or Simulator
-- iOS 16.2
+- Headphones
+- iOS 16.0
 
 ## Screenshots
 ### Main page with collection view of ambiences
