@@ -2,6 +2,7 @@ name: Ambience
 options:
     bundleIdPrefix: com.CodingKovs.Ambience
     postGenCommand: swiftlint --fix
+    groupSortPosition: top
 deploymentTarget: '16.0'
 settings:
     MARKETING_VERSION: 4.0
@@ -22,14 +23,29 @@ targets:
       base:
         INFOPLIST_FILE: Ambience/Info.plist
         PRODUCT_BUNDLE_IDENTIFIER: com.CodingKovs.Ambience
-        ENABLE_USER_SCRIPT_SANDBOXING: false
-        ASSETCATALOG_COMPILER_GENERATE_ASSET_SYMBOLS: true
+        ENABLE_USER_SCRIPT_SANDBOXING: NO
+        ASSETCATALOG_COMPILER_GENERATE_ASSET_SYMBOLS: YES
+        ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS: YES
+        ASSETCATALOG_COMPILER_GENERATE_ASSET_SYMBOL_FRAMEWORKS: YES
         MY_SETTING: platform ${platform}
     dependencies:
       - package: WhatsNewPack
         product: WhatsNewPack
       - package: SnapKit
         product: SnapKit
+        
+  AmbienceTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources: AmbienceTests
+    dependencies:
+      - target: Ambience
+  AmbienceUITests:
+    type: bundle.unit-test
+    platform: iOS
+    sources: AmbienceUITests
+    dependencies:
+      - target: Ambience
             
 
     
