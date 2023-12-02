@@ -1,11 +1,19 @@
 name: Ambience
 options:
     bundleIdPrefix: com.CodingKovs.Ambience
+    postGenCommand: swiftlint --fix
 deploymentTarget: '16.0'
 settings:
     MARKETING_VERSION: 4.0
+packages:
+  WhatsNewPack:
+    url: https://github.com/kovs705/WhatsNewPack
+    branch: main
+  SnapKit:
+    url: https://github.com/SnapKit/SnapKit
+    branch: main
 targets:
-  ioslk:
+  Ambience:
     type: application
     platform: iOS
     deploymentTarget: '16.0'
@@ -17,5 +25,11 @@ targets:
         ENABLE_USER_SCRIPT_SANDBOXING: false
         ASSETCATALOG_COMPILER_GENERATE_ASSET_SYMBOLS: true
         MY_SETTING: platform ${platform}
+    dependencies:
+      - package: WhatsNewPack
+        product: WhatsNewPack
+      - package: SnapKit
+        product: SnapKit
+            
 
     

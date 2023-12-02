@@ -13,12 +13,8 @@ let package = Package(
     ],
     
     dependencies: [
-        // Here we define our package's external dependencies
-        // and from where they can be fetched:
-        .package(
-            url: "",
-            from: "5.6.0"
-        )
+        .package(url: "https://github.com/SnapKit/SnapKit.git", .upToNextMajor(from: "5.0.1")),
+	.package(url: "https://github.com/kovs705/WhatsNewPack.git")
     ],
     
     targets: [
